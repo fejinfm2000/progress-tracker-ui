@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MainLayoutComponent } from './main-layout.component';
-import { DashboardModule } from '../../modules/dashboard/dashboard.module';
+import { WebModule } from '../../modules/web/web.module';
 import { AppRoutingModule } from '../../app-routing.module';
 import { SharedModule } from '../../shared/shared.module';
-
-
 
 @NgModule({
   declarations: [
@@ -14,7 +12,7 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     AppRoutingModule,
-    DashboardModule,
+    WebModule,
     SharedModule
   ]
 })
