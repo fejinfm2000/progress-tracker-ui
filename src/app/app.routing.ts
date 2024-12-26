@@ -12,6 +12,11 @@ export const routes: Routes = [
           import('./modules/web/web.module').then((m) => m.WebModule)
       },
       {
+        path: 'auth',
+        loadChildren: () =>
+          import('./modules/auth/auth.module').then((m) => m.AuthModule)
+      },
+      {
         path: 'webApp',
         loadChildren: () =>
           import('./modules/web-app/web-app.module').then((m) => m.WebAppModule)

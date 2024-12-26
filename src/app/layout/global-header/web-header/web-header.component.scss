@@ -1,0 +1,25 @@
+.web-header-spacer {
+    flex: 1 1 auto;
+}
+
+.a-tab {
+    font-size: medium;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 0.5rem;
+}
+
+.icon {
+    height: 5rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+.a-tab span a:hover {
+    border: solid 1px;
+    border-radius: 30px;
+    padding: 5px;
+}
