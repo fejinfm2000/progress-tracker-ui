@@ -2,6 +2,8 @@
   "name": "progress-tracker-ui",
   "version": "0.0.0",
   "scripts": {
+    "build:ssr": "ng build --configuration production && ng run progress-tracker-ui:server",
+    "serve:ssr": "node dist/progress-tracker-ui/main.js",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
