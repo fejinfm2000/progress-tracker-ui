@@ -2,12 +2,17 @@
     flex: 1 1 auto;
 }
 
+.web-header {
+    background-color: #f2f7fc;
+}
+
 .a-tab {
     font-size: medium;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .icon {
@@ -16,6 +21,7 @@
 
 a {
     text-decoration: none;
+    color: #7f74ef;
 }
 
 .a-tab span a:hover {

@@ -1,0 +1,49 @@
+.about-section {
+    margin: 0rem 0rem 0rem 5rem;
+}
+
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 75rem;
+    margin: 0 auto;
+    flex-wrap: wrap;
+
+}
+
+.about-image {
+    flex: 1;
+    padding: 0rem;
+    text-align: center;
+
+    @media (max-width: 900px) {
+        display: none;
+    }
+}
+
+
+.about-text {
+    flex: 1;
+
+    h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin: 0rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin: 2rem 0;
+
+        .app-name {
+            color: #7f74ef;
+            font-weight: bold;
+        }
+    }
+
+}
+
+.header-button {
+    color: #7f74ef;
+}

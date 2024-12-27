@@ -1,0 +1,52 @@
+.features-section {
+  margin: 0rem 5rem 0rem 5rem;
+  text-align: center;
+}
+
+.features-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  /* Adjust the gap between cards */
+}
+
+.feature-card {
+  flex: 1 1 calc(33.33% - 1rem);
+  /* Default to 3 columns */
+  max-width: calc(33.33% - 1rem);
+  /* Ensure cards fit within the container */
+  min-width: 280px;
+  /* Prevent cards from becoming too narrow */
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+/* Responsiveness with different screen sizes */
+@media (max-width: 1200px) {
+  .feature-card {
+    flex: 1 1 calc(50% - 1rem);
+    /* 2 cards per row on medium screens */
+    max-width: calc(50% - 1rem);
+
+  }
+}
+
+@media (max-width: 600px) {
+  .feature-card {
+    flex: 1 1 100%;
+    /* 1 card per row on small screens */
+    max-width: 100%;
+  }
+}
+
+.feature-card:hover {
+  color: #7f74ef;
+  transform: scale(1);
+  /* Scale up the card on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  /* Add shadow for a floating effect */
+}

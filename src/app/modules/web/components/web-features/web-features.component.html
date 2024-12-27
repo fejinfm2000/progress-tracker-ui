@@ -1,1 +1,14 @@
-<p>web-features works!</p>
+<div class="features-section">
+    <h2>Our Features</h2>
+    <div class="features-container">
+        <mat-card *ngFor="let feature of features" class="feature-card">
+            <mat-card-header>
+                <mat-icon mat-card-avatar>{{ feature.icon }}</mat-icon>
+                <mat-card-title>{{ feature.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{ feature.description }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

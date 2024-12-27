@@ -1,0 +1,37 @@
+.heading {
+  font-size: 90px;
+  margin: 0rem;
+  color: #7f74ef;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  background-color: #f2f7fc;
+}
+
+.header-section-a {
+  margin: 7rem 0rem 0em 3rem;
+  flex: 3;
+}
+
+.header-section-b {
+  flex: 2;
+  margin-top: 10rem;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.sub-header-sec-a {
+  width: 90%;
+}
+
+.header-button {
+  color: #7f74ef;
+}
+
+.header-sec-button {
+  margin: 2rem;
+}
