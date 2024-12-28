@@ -7,12 +7,12 @@
 .container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   background-color: #f2f7fc;
 }
 
 .header-section-a {
   margin: 7rem 0rem 0em 3rem;
-  flex: 3;
 }
 
 .header-section-b {
@@ -22,6 +22,15 @@
   @media (max-width: 900px) {
     display: none;
   }
+}
+
+@media (max-width: 900px) {
+  .heading {
+    font-size: 7rem;
+    margin: 0rem;
+    color: #7f74ef;
+  }
+
 }
 
 .sub-header-sec-a {
@@ -34,4 +43,8 @@
 
 .header-sec-button {
   margin: 2rem;
+}
+
+.image {
+  width: 100%;
 }

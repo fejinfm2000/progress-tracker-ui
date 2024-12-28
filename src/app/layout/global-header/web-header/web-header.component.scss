@@ -1,20 +1,3 @@
-.web-header-spacer {
-    flex: 1 1 auto;
-}
-
-.web-header {
-    background-color: #f2f7fc;
-}
-
-.a-tab {
-    font-size: medium;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-
 .icon {
     height: 5rem;
 }
@@ -28,4 +11,47 @@ a {
     border: solid 1px;
     border-radius: 30px;
     padding: 5px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f2f7fc;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.tab-logo {
+    display: none;
+}
+
+@media (max-width: 600px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        background-color: #f2f7fc;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .tab-logo {
+        display: contents;
+    }
+
+    .icon {
+        height: 2rem;
+    }
+
 }
