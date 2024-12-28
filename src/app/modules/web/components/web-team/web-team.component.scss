@@ -16,10 +16,6 @@ mat-card-header {
     text-align: center;
 }
 
-h1 {
-    margin: 0rem 0rem 0rem 1rem;
-}
-
 mat-progress-bar {
     width: 100%;
     margin-top: 10px;
@@ -33,15 +29,19 @@ mat-card-actions {
     margin: 0rem 3rem 0rem 4rem;
 }
 
+.heading {
+    margin: 1rem
+}
+
 @media (max-width: 900px) {
     .team-container {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
         margin: 0rem;
     }
 
     .container {
-        margin: 0rem
+        margin: 1rem
     }
 }

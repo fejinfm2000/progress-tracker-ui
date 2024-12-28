@@ -21,6 +21,11 @@
         display: none;
     }
 }
+@media (max-width: 900px) {
+    .about-section {
+        margin: 1rem
+    }
+}
 
 
 .about-text {
