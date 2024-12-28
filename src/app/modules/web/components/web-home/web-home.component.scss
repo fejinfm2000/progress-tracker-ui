@@ -13,6 +13,7 @@
 
 .header-section-a {
   margin: 7rem 0rem 0em 3rem;
+  flex: 1;
 }
 
 .header-section-b {
@@ -29,6 +30,10 @@
     font-size: 7rem;
     margin: 0rem;
     color: #7f74ef;
+  }
+  .header-section-a {
+    margin: 0rem 0rem 0em 3rem;
+    flex: 1;
   }
 
 }
