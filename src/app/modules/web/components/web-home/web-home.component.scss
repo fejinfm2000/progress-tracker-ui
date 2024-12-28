@@ -12,13 +12,12 @@
 }
 
 .header-section-a {
-  margin: 7rem 0rem 0em 3rem;
+  margin: 0rem 0rem 0em 3rem;
   flex: 1;
 }
 
 .header-section-b {
   flex: 2;
-  margin-top: 10rem;
 
   @media (max-width: 900px) {
     display: none;
