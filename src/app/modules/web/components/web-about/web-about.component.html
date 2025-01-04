@@ -21,4 +21,23 @@
             <img src="assets/images/multi-step.png" alt="Progress Tracker Illustration" />
         </div>
     </div>
+
+    <button (click)="viewVisitors()" mat-stroked-button>
+        <p class="header-button">{{isViewable? "View Visitors":"Hide Visitors"}}</p>
+    </button>
+    <div class="team-container" *ngIf="isViewable">
+        <mat-card *ngFor="let visitor of allVisitors" class="team-member-card">
+            <mat-card-header>
+                <mat-card-title>{{ visitor.visitorName }}</mat-card-title>
+                <!-- <mat-card-subtitle>{{ visitor.role }}</mat-card-subtitle> -->
+            </mat-card-header>
+            <mat-card-content>
+                <p>Visitor: {{ visitor.visitorName }}</p>
+                <p>FeedBack Message: {{ visitor.feedBackMessage }}</p>
+                <p>Joined Date: {{ visitor.createdAt | date }}</p>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+
 </div>

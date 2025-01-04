@@ -5,13 +5,13 @@
   <div>
 
     <div class="mat-contact-form">
-      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+      <div [formGroup]="contactForm">
         <div class="form-row">
           <!-- Name Field -->
           <mat-form-field class="custom-field" appearance="outline">
             <mat-label>Name</mat-label>
-            <input matInput formControlName="name" />
-            <mat-error *ngIf="contactForm.controls['name'].hasError('required')">
+            <input matInput formControlName="visitorName" />
+            <mat-error *ngIf="contactForm.controls['visitorName'].hasError('required')">
               Name is required
             </mat-error>
           </mat-form-field>
@@ -19,11 +19,11 @@
           <!-- Email Field -->
           <mat-form-field class="custom-field" appearance="outline">
             <mat-label>Email</mat-label>
-            <input matInput type="email" formControlName="email" />
-            <mat-error *ngIf="contactForm.controls['email'].hasError('required')">
+            <input matInput type="email" formControlName="visitorEmail" />
+            <mat-error *ngIf="contactForm.controls['visitorEmail'].hasError('required')">
               Email is required
             </mat-error>
-            <mat-error *ngIf="contactForm.controls['email'].hasError('email')">
+            <mat-error *ngIf="contactForm.controls['visitorEmail'].hasError('email')">
               Enter a valid email address
             </mat-error>
           </mat-form-field>
@@ -31,8 +31,8 @@
           <!-- Message Field -->
           <mat-form-field class="custom-field" appearance="outline">
             <mat-label>Message</mat-label>
-            <textarea matInput formControlName="message" rows="1"></textarea>
-            <mat-error *ngIf="contactForm.controls['message'].hasError('required')">
+            <textarea matInput formControlName="feedBackMessage" rows="1"></textarea>
+            <mat-error *ngIf="contactForm.controls['feedBackMessage'].hasError('required')">
               Message is required
             </mat-error>
           </mat-form-field>
@@ -41,11 +41,11 @@
         <!-- Submit Button -->
 
         <div class="button-row">
-          <button routerLink="/auth/signup" mat-stroked-button [disabled]="contactForm.invalid">
+          <button (click)="onSubmit()" mat-stroked-button [disabled]="contactForm.invalid || !contactForm.dirty ">
             <p class="header-button">Send Message</p>
           </button>
         </div>
-      </form>
+      </div>
     </div>
 
   </div>

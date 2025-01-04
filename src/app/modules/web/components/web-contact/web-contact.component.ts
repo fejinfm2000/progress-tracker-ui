@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { VisitorService } from '../../service/visitor.service';
+import { Subject, take, takeUntil } from 'rxjs';
+import { IVisitor } from '../../models/visitor';
 
 @Component({
   selector: 'app-web-contact',
@@ -8,18 +11,30 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   templateUrl: './web-contact.component.html',
   styleUrl: './web-contact.component.scss'
 })
-export class WebContactComponent {
+export class WebContactComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+  unSubscribe$ = new Subject();
+  constructor(private fb: FormBuilder, private visitorService: VisitorService) {
     this.contactForm = this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      message: ['', Validators.required]
+      visitorName: ['', Validators.required],
+      visitorEmail: ['', [Validators.required, Validators.email]],
+      feedBackMessage: ['', Validators.required]
     });
   }
 
+  ngOnInit(): void {
+
+  }
+
   onSubmit() {
-      console.log('Form Submitted', this.contactForm.value);
+    this.visitorService.addVisitor(this.contactForm.value).subscribe(data => {
+      this.contactForm.patchValue(data);
+      this.contactForm.markAsPristine();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(null);
+    this.unSubscribe$.complete();
   }
 }

@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { WebFooterComponent } from './layout/footer/web-footer/web-footer.component';
 import { AuthComponent } from './modules/auth/auth.component';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { webInterceptor } from './core/interceptors/web.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AuthComponent } from './modules/auth/auth.component';
   ],
   providers: [
     provideClientHydration(withEventReplay()),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch(), withInterceptors([webInterceptor])),
+
   ],
   bootstrap: [AppComponent]
 })
