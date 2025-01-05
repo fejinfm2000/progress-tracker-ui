@@ -1,1 +1,69 @@
-<p>log-in works!</p>
+<div class="features-section">
+    <mat-card class="feature-card">
+        <div class="card-container">
+            <div class="image-container">
+                <img class="image" src="/assets/images/login.avif" alt="login">
+            </div>
+            <div class="form-container">
+                <div>
+                    <h1 class="account-tit">Login</h1>
+                </div>
+
+                <div [formGroup]="loginForm">
+                    <div class="form-row">
+                        <!-- Name Field -->
+                        <div class="name-row">
+                            <div>
+                                <mat-form-field class="custom-field" appearance="outline">
+                                    <mat-label>First Name</mat-label>
+                                    <input matInput formControlName="firstName" />
+                                    <mat-error *ngIf="loginForm.controls['firstName'].hasError('required')">
+                                        Name is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field class="custom-field" appearance="outline">
+                                    <mat-label>Last Name</mat-label>
+                                    <input matInput formControlName="lastName" />
+                                    <mat-error *ngIf="loginForm.controls['lastName'].hasError('required')">
+                                        Last Name is required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <!-- Email Field -->
+                        <mat-form-field class="custom-field" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput type="email" formControlName="email" />
+                            <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+                                Email is required
+                            </mat-error>
+                            <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+                                Enter a valid email address
+                            </mat-error>
+                        </mat-form-field>
+
+                        <!-- Password Field -->
+                        <mat-form-field class="custom-field" appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput type="password" formControlName="password" />
+                            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                                Please enter your password
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <a href="hai">Forgot Password?</a>
+                    <!-- Submit Button -->
+
+                    <div class="button-row">
+                        <button (click)="onLogin()" mat-stroked-button [disabled]="loginForm.invalid">
+                            <p class="header-button">Let's track</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </mat-card>
+</div>
