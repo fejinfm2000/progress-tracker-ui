@@ -28,8 +28,11 @@
     <div class="team-container" *ngIf="isViewable">
         <mat-card *ngFor="let visitor of filteredVisitors" class="team-member-card">
             <mat-card-header>
-                <mat-card-title>{{ visitor.visitorName }}</mat-card-title>
-                <!-- <mat-card-subtitle>{{ visitor.role }}</mat-card-subtitle> -->
+                <mat-card-title>
+                    <span class="icon">
+                        {{firstLeter(visitor.visitorName)}}
+                    </span>
+                    {{ visitor.visitorName }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
                 <p>Visitor: {{ visitor.visitorName }}</p>

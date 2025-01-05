@@ -28,7 +28,7 @@ export class WebContactComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.visitorService.addVisitor(this.contactForm.value).subscribe(data => {
-      this.contactForm.patchValue(data);
+      this.contactForm.reset();
       this.contactForm.markAsPristine();
     });
   }

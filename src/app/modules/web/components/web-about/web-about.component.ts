@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { VisitorService } from '../../service/visitor.service';
 import { IVisitor } from '../../models/visitor';
 import { Subject, takeUntil } from 'rxjs';
@@ -20,6 +20,10 @@ export class WebAboutComponent implements OnInit, OnDestroy {
   constructor(private visitorService: VisitorService) { }
 
   ngOnInit(): void {
+  }
+
+  firstLeter(name: string) {
+    return name?.charAt(0);
   }
 
   viewVisitors() {
