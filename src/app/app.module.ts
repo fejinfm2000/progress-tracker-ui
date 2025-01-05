@@ -11,16 +11,20 @@ import { WebFooterComponent } from './layout/footer/web-footer/web-footer.compon
 import { AuthComponent } from './modules/auth/auth.component';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { webInterceptor } from './core/interceptors/web.interceptor';
+import { SpinnerComponent } from './shared/components/spinner/spinner.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    SpinnerComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    SharedModule
   ],
   providers: [
     provideClientHydration(withEventReplay()),

@@ -23,10 +23,10 @@
     </div>
 
     <button (click)="viewVisitors()" mat-stroked-button>
-        <p class="header-button">{{isViewable? "View Visitors":"Hide Visitors"}}</p>
+        <p class="header-button">{{!isViewable? "View Visitors":"Hide Visitors"}}</p>
     </button>
     <div class="team-container" *ngIf="isViewable">
-        <mat-card *ngFor="let visitor of allVisitors" class="team-member-card">
+        <mat-card *ngFor="let visitor of filteredVisitors" class="team-member-card">
             <mat-card-header>
                 <mat-card-title>{{ visitor.visitorName }}</mat-card-title>
                 <!-- <mat-card-subtitle>{{ visitor.role }}</mat-card-subtitle> -->
@@ -38,6 +38,12 @@
             </mat-card-content>
 
         </mat-card>
+    </div>
+
+    <div *ngIf="isViewable && allVisitors.length>displayLimit">
+        <button (click)="showFilteredCards()" mat-stroked-button>
+            <p class="header-button">{{ !showAll ? "Show More" :"Show Less"}}</p>
+        </button>
     </div>
 
 </div>
