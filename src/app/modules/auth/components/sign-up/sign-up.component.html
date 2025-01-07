@@ -49,16 +49,16 @@
                         <!-- Password Field -->
                         <mat-form-field class="custom-field" appearance="outline">
                             <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password" />
-                            <mat-error *ngIf="signupForm.controls['password'].hasError('required')">
+                            <input matInput type="password" formControlName="passwordHash" />
+                            <mat-error *ngIf="signupForm.controls['passwordHash'].hasError('required')">
                                 Please enter your password
                             </mat-error>
                         </mat-form-field>
+                        <mat-checkbox formControlName="termsAndConditionFlag" class="example-margin">
+                            <p>I agree to the <a href="hai">Terms &
+                                    conditions</a></p>
+                        </mat-checkbox>
                     </div>
-                    <mat-checkbox class="example-margin">
-                        <p>I agree to the <a href="hai">Terms &
-                                conditions</a></p>
-                    </mat-checkbox>
 
                     <!-- Submit Button -->
 

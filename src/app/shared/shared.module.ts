@@ -10,6 +10,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { RouterModule } from '@angular/router';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [],
@@ -24,7 +26,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatProgressBarModule,
     CommonModule,
     MatGridListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule,
+    MatSidenavModule
   ],
   exports: [
     MatButtonModule,
@@ -37,7 +41,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatProgressBarModule,
     CommonModule,
     MatGridListModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule,
+    MatSidenavModule
+
   ]
 })
 export class SharedModule { }

@@ -47,8 +47,8 @@
                         <!-- Password Field -->
                         <mat-form-field class="custom-field" appearance="outline">
                             <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password" />
-                            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                            <input matInput type="password" formControlName="passwordHash" />
+                            <mat-error *ngIf="loginForm.controls['passwordHash'].hasError('required')">
                                 Please enter your password
                             </mat-error>
                         </mat-form-field>

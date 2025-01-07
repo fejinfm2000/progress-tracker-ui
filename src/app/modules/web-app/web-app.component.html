@@ -1,1 +1,23 @@
-<p>web-app works!</p>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <!-- Vertical Navigation -->
+    <nav class="vertical-nav">
+      <a routerLink="/webApp/home">Home</a>
+      <a routerLink="/webApp/login">About</a>
+      <a routerLink="/webApp/login">Contact</a>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Horizontal Navigation -->
+    <nav class="horizontal-nav">
+      <a routerLink="/webApp/home">Home1</a>
+      <a routerLink="/webApp/login">About1</a>
+      <a routerLink="/webApp/login">Contact1</a>
+    </nav>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
