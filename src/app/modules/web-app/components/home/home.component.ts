@@ -8,5 +8,14 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+  name: string = 'Your Name';
+  newTask: string = ''; // To hold the input task
+  tasks: string[] = []; // Array to store tasks
 
+  addTask(): void {
+    if (this.newTask.trim()) {
+      this.tasks.push(this.newTask.trim());
+      this.newTask = '';
+    }
+  }
 }

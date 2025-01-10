@@ -2,20 +2,29 @@
   <mat-sidenav mode="side" opened class="sidenav">
     <!-- Vertical Navigation -->
     <nav class="vertical-nav">
-      <a routerLink="/webApp/home">Home</a>
-      <a routerLink="/webApp/login">About</a>
-      <a routerLink="/webApp/login">Contact</a>
+      <img src="assets/images/tracker-logo.png" class="icon" alt="asas">
+      <a routerLink="/webApp/home"><i class="material-icons">home</i></a>
+      <a routerLink="/webApp/login"><i class="fa-regular fa-calendar-days"></i></a>
+      <a routerLink="/webApp/login"><i class="fa-solid fa-list-check"></i></a>
+      <a routerLink="/webApp/login"><i class="fa-solid fa-user"></i> </a>
+      <a routerLink="/webApp/login"><i class="fa-regular fa-message"></i> </a>
+      <a routerLink="/webApp/login"><i class="fa-solid fa-gear"></i> </a>
     </nav>
   </mat-sidenav>
 
   <mat-sidenav-content>
     <!-- Horizontal Navigation -->
-    <nav class="horizontal-nav">
-      <a routerLink="/webApp/home">Home1</a>
-      <a routerLink="/webApp/login">About1</a>
-      <a routerLink="/webApp/login">Contact1</a>
-    </nav>
-
+    <div class="hor-nav">
+      <nav class="horizontal-nav">
+        <img src="assets/images/tracker-logo.png" class="icon" alt="asas">
+        <a routerLink="/webApp/home"><i class="material-icons">home</i></a>
+        <a routerLink="/webApp/login"><i class="fa-regular fa-calendar-days"></i></a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-list-check"></i></a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-user"></i> </a>
+        <a routerLink="/webApp/login"><i class="fa-regular fa-message"></i> </a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-gear"></i> </a>
+      </nav>
+    </div>
     <div class="content">
       <router-outlet></router-outlet>
     </div>

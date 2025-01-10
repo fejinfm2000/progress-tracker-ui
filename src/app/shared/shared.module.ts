@@ -6,7 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -28,7 +28,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatGridListModule,
     MatCheckboxModule,
     RouterModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
   ],
   exports: [
     MatButtonModule,
@@ -43,7 +44,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatGridListModule,
     MatCheckboxModule,
     RouterModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
 
   ]
 })

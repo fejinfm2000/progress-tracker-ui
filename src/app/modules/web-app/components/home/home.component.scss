@@ -1,6 +1,99 @@
+:host {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // min-height: 100vh;
+    // background-color: #f4f4f4;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.icon {
+    width: 7rem;
+}
+
+.profile-picture {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    margin: 2rem;
+    border: 3px solid #007BFF;
+    background-color: #e0e0e0;
+}
+
+.welcome-message {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.user-info {
+    color: #555;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.task-icon {
+    padding: 0.3rem;
+    border-radius: 5rem;
+    color: #7f74ef;
+    background-color: white;
+    margin-right: 1rem;
+}
+
+button {
+    background-color: #7f74ef;
+    height: 3rem;
+}
+
+.header-button {
+    color: white;
+    width: 7rem;
+}
+
+.home-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .welcome-message {
+        font-size: 1.5em;
+    }
+
+    .container {
+        margin-left: 2rem;
+    }
+
+    .welcome-text {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        max-width: 25%;
+    }
+
+}
+
+
 @media (max-width: 769px) {
     .container {
         margin-top: 4rem;
     }
 
+    .welcome-text {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: stretch;
+        justify-content: center;
+        max-width: 50%;
+    }
 }
