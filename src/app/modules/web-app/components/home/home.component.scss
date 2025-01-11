@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .welcome-message {
@@ -44,10 +45,11 @@
 
 button {
     background-color: #7f74ef;
-    height: 3rem;
     border: none;
     border-radius: 10rem;
     cursor: pointer;
+    margin: 0rem;
+    padding: 0rem;
 }
 
 .header-button {
@@ -126,6 +128,8 @@ button {
 .add-task-button {
     border: none;
     color: white;
+    font-size: larger;
+    margin-left: 1rem;
 }
 
 .header-action {
