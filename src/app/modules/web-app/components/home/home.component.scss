@@ -1,34 +1,38 @@
-:host {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // min-height: 100vh;
-    // background-color: #f4f4f4;
-}
-
 .profile-container {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 }
 
-.icon {
-    width: 7rem;
-}
-
-.profile-picture {
-    width: 8rem;
-    height: 8rem;
-    border-radius: 50%;
-    margin: 2rem;
-    border: 3px solid #007BFF;
-    background-color: #e0e0e0;
-}
-
 .welcome-message {
     font-size: 1.2em;
     margin-bottom: 10px;
     color: #333;
+}
+
+.welcome-section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 1rem;
+}
+
+.profile {
+    background-color: yellow;
+    border-radius: 10rem;
+    width: 3rem;
+    height: 3rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+.welcome-message-section {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 50%;
 }
 
 .user-info {
@@ -60,6 +64,8 @@ button {
     flex-direction: row;
     align-items: center;
     flex-wrap: wrap;
+    margin-top: 2rem;
+
 }
 
 @media (min-width: 768px) {
@@ -70,16 +76,6 @@ button {
     .container {
         margin-left: 2rem;
     }
-
-    .welcome-text {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: stretch;
-        justify-content: center;
-        max-width: 25%;
-    }
-
 }
 
 
@@ -88,12 +84,19 @@ button {
         margin-top: 4rem;
     }
 
-    .welcome-text {
+    .welcome-section {
         display: flex;
-        flex-direction: column;
         flex-wrap: wrap;
-        align-items: stretch;
-        justify-content: center;
-        max-width: 50%;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .home-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 5rem 0rem 0rem 1rem;
+
     }
 }

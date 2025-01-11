@@ -1,17 +1,23 @@
 <div class="container">
     <div class="home-header">
         <div class="profile-container">
-            <div class="profile-picture"></div>
-            <div class="welcome-text">
-                <p class="welcome-message">Welcome to My Profile!</p>
-                <p class="user-info">Hi, I'm {{ name }}. I love creating responsive designs and building awesome web
-                    experiences!</p>
+            <div class="welcome-section">
+                <div class="profile">Hi</div>
+                <div class="welcome-message-section">
+                    <p class="welcome-message">Welcome to My Profile!</p>
+                    <p class="user-info">Hi, I'm {{ name }}. I love creating responsive designs and building awesome web
+                        experiences!</p>
+                </div>
             </div>
+            <button (click)="addTask()" mat-stroked-button>
+                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
+            </button>
+            <button (click)="addTask()" mat-stroked-button>
+                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
+            </button>
+            <button (click)="addTask()" mat-stroked-button>
+                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
+            </button>
         </div>
 
-        <button (click)="addTask()" mat-stroked-button>
-            <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
-        </button>
     </div>
-
-</div>
