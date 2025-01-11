@@ -19,7 +19,7 @@
 }
 
 .profile {
-    background-color: yellow;
+    background-color: #7f74ef;
     border-radius: 10rem;
     width: 3rem;
     height: 3rem;
@@ -41,17 +41,13 @@
     margin: 0;
 }
 
-.task-icon {
-    padding: 0.3rem;
-    border-radius: 5rem;
-    color: #7f74ef;
-    background-color: white;
-    margin-right: 1rem;
-}
 
 button {
     background-color: #7f74ef;
     height: 3rem;
+    border: none;
+    border-radius: 10rem;
+    cursor: pointer;
 }
 
 .header-button {
@@ -66,6 +62,78 @@ button {
     flex-wrap: wrap;
     margin-top: 2rem;
 
+}
+
+/* div */
+.search-box {
+    background: #7f74ef;
+    height: 3rem;
+    border-radius: 26rem;
+    padding: 0.2rem;
+}
+
+/* input */
+.search-input {
+    outline: none;
+    border: none;
+    background: none;
+    width: 0;
+    padding: 0;
+    color: #fff;
+    float: right;
+    font-size: 16px;
+    transition: .3s;
+    line-height: 40px;
+}
+
+.search-input::placeholder {
+    color: white;
+}
+
+/* icon */
+.search-btn {
+    color: white;
+    float: right;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50px;
+    background: #7f74ef;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: .5s;
+}
+
+.search-input:focus,
+.search-input:not(:placeholder-shown) {
+    width: 10rem;
+    padding: 0 0.4rem;
+}
+
+.search-box:hover>.search-input {
+    width: 10rem;
+    padding: 0 0.4rem;
+}
+
+.search-box:hover>.search-btn,
+.search-input:focus+.search-btn,
+.search-input:not(:placeholder-shown)+.search-btn {
+    background: white;
+    color: #7f74ef;
+}
+
+.add-task-button {
+    border: none;
+    color: white;
+}
+
+.header-action {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem;
 }
 
 @media (min-width: 768px) {

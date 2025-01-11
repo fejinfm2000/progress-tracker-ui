@@ -9,15 +9,27 @@
                         experiences!</p>
                 </div>
             </div>
-            <button (click)="addTask()" mat-stroked-button>
-                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
-            </button>
-            <button (click)="addTask()" mat-stroked-button>
-                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
-            </button>
-            <button (click)="addTask()" mat-stroked-button>
-                <p class="header-button"><i class="fa-solid fa-plus task-icon"></i>Add Task</p>
-            </button>
+
+
+            <div class="header-action">
+
+
+                <div class="search-box">
+                    <input type="text" class="search-input" placeholder="Search here..">
+                    <a class="search-btn" href="#">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </div>
+
+                <div class="search-box">
+                    <button (click)="addTask()">
+                        <p class="add-task-button">Add Task</p>
+                    </button>
+                    <i class="fa-solid fa-plus search-btn"></i>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
