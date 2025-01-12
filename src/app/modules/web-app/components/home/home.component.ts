@@ -12,6 +12,7 @@ import {
 import { LogInComponent } from '../../../auth/components/log-in/log-in.component';
 import { AddTaskComponent } from '../../Dialog/add-task/add-task.component';
 import { IUser } from '../../../auth/models/auth';
+import { SessionStorageService } from '../../../../services/session-storage.service';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -53,18 +54,31 @@ export class HomeComponent implements OnInit {
 
   ];
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog, private sessionStorageService: SessionStorageService) { }
 
   ngOnInit(): void {
     let userData: IUser;
-    if (sessionStorage.getItem('user')) {
-      userData = JSON.parse(sessionStorage.getItem('user') || '');
+    let sessionData = this.sessionStorageService.getItem('user');
+    if (sessionData) {
+      userData = sessionData
       this.name = userData.firstName
     }
 
     this.updateVisibleItems();
     this.generateInitialsForAvatars();
     this.generateRandomNumber();
+  }
+
+  isSidebarOpen = false;
+  notifications = [
+    'You have a new message from John.',
+    'Reminder: Meeting at 3 PM today.',
+    'Your package has been delivered.',
+    'New comment on your post.',
+  ];
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
   }
 
   generateInitialsForAvatars() {

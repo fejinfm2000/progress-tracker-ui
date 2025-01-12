@@ -2,6 +2,7 @@
     <!-- header section -->
     <div class="home-header">
         <div class="profile-container">
+
             <div class="welcome-section">
                 <!-- <div class="profile"> -->
                 <div>
@@ -13,6 +14,7 @@
                     <p class="user-info">Welcome! Let's make today awesome.</p>
                 </div>
             </div>
+
             <div class="header-action">
                 <div class="search-box">
                     <input type="text" class="search-input" placeholder="Search here..">
@@ -20,6 +22,7 @@
                         <i class="fas fa-search"></i>
                     </a>
                 </div>
+
                 <div class="search-box">
                     <button (click)="addTask()">
                         <p class="add-task-button">Add Task</p>
@@ -27,7 +30,32 @@
                     <i class="fa-solid fa-plus search-btn" (click)="addTask()"></i>
                 </div>
 
+                <div class="notification-container">
+                    <!-- Bell Icon -->
+                    <button class="bell-icon" (click)="toggleSidebar()">
+                        <i class="fa fa-bell"></i>
+                        <span class="notification-count" *ngIf="notifications.length">{{ notifications.length }}</span>
+                    </button>
+
+                    <!-- Right Sidebar -->
+                    <div class="side-nav" [class.open]="isSidebarOpen">
+                        <div class="side-nav-header">
+                            <h3>Inbox</h3>
+                            <button class="close-btn" (click)="toggleSidebar()">×</button>
+                        </div>
+                        <div class="side-nav-content">
+                            <ul>
+                                <li *ngFor="let notification of notifications">
+                                    <p>{{ notification }}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
+
 
         </div>
     </div>
