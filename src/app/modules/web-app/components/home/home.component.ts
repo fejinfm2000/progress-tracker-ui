@@ -56,10 +56,12 @@ export class HomeComponent implements OnInit {
   constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
-    let userData: IUser = JSON.parse(sessionStorage.getItem('user') || '');
-    console.log(userData);
+    let userData: IUser;
+    if (sessionStorage.getItem('user')) {
+      userData = JSON.parse(sessionStorage.getItem('user') || '');
+      this.name = userData.firstName
+    }
 
-    // this.name=userData.firstName
     this.updateVisibleItems();
     this.generateInitialsForAvatars();
     this.generateRandomNumber();
