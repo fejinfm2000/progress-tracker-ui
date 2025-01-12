@@ -196,7 +196,7 @@ button {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: right;
-    // margin: 2rem;
+    gap: 1rem;
 }
 
 .carousel-content-sec {
@@ -432,4 +432,8 @@ button {
         margin: 0rem 3rem 0rem 3rem;
     }
 
+    .search-box:hover > .search-input{
+        width: 18rem;
+        padding: 0 0.4rem;
+    }
 }
