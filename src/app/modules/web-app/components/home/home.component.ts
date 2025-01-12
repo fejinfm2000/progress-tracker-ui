@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { IOverview, IProjectOverView } from '../../models/web-app';
-
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { LogInComponent } from '../../../auth/components/log-in/log-in.component';
+import { AddTaskComponent } from '../../Dialog/add-task/add-task.component';
+import { IUser } from '../../../auth/models/auth';
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -9,7 +20,7 @@ import { IOverview, IProjectOverView } from '../../models/web-app';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit {
-  name: string = 'Your Name';
+  name: string = 'Buddy';
   newTask: string = '';
   tasks: string[] = [];
   radius = 16;
@@ -42,9 +53,13 @@ export class HomeComponent implements OnInit {
 
   ];
 
-  constructor() { }
+  constructor(private matDialog: MatDialog) { }
 
   ngOnInit(): void {
+    let userData: IUser = JSON.parse(sessionStorage.getItem('user') || '');
+    console.log(userData);
+
+    // this.name=userData.firstName
     this.updateVisibleItems();
     this.generateInitialsForAvatars();
     this.generateRandomNumber();
@@ -62,15 +77,19 @@ export class HomeComponent implements OnInit {
     }));
   }
 
-  onAddAvatar() {
-    console.log('Added..');
+  addTask(): void {
+    this.openDialog();
   }
 
-  addTask(): void {
-    if (this.newTask.trim()) {
-      this.tasks.push(this.newTask.trim());
-      this.newTask = '';
-    }
+  openDialog(): void {
+    const dialogRef = this.matDialog.open(AddTaskComponent, {
+      disableClose: true,
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   prevSlide() {

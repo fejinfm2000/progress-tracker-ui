@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
 import { LogInComponent } from '../auth/components/log-in/log-in.component';
 import { HomeComponent } from './components/home/home.component';
+import { AddTaskComponent } from './Dialog/add-task/add-task.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     WebAppComponent,
-    HomeComponent
+    HomeComponent,
+    AddTaskComponent
   ],
   imports: [
     RouterModule.forChild(routes),

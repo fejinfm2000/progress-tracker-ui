@@ -12,6 +12,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [],
@@ -30,6 +31,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     RouterModule,
     MatSidenavModule,
     FormsModule,
+    MatDialogModule
   ],
   exports: [
     MatButtonModule,
@@ -46,6 +48,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     RouterModule,
     MatSidenavModule,
     FormsModule,
+    MatDialogModule
 
   ]
 })

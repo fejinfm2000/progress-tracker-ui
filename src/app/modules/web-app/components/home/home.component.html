@@ -9,9 +9,8 @@
                     <!-- <img class="profile-image" src="assets/images/profile1.webp" alt=""> -->
                 </div>
                 <div class="welcome-message-section">
-                    <p class="welcome-message">Welcome to My Profile!</p>
-                    <p class="user-info">Hi, I'm {{ name }}. I love creating responsive designs and building awesome web
-                        experiences!</p>
+                    <p class="welcome-message">Hi, {{ name }} 👋</p>
+                    <p class="user-info">Welcome! Let's make today awesome.</p>
                 </div>
             </div>
             <div class="header-action">
@@ -25,7 +24,7 @@
                     <button (click)="addTask()">
                         <p class="add-task-button">Add Task</p>
                     </button>
-                    <i class="fa-solid fa-plus search-btn"></i>
+                    <i class="fa-solid fa-plus search-btn" (click)="addTask()"></i>
                 </div>
 
             </div>
@@ -84,7 +83,7 @@
                                         </ng-template>
                                     </div>
                                     <!-- Add New Avatar -->
-                                    <div class="avatar add-avatar" (click)="onAddAvatar()">
+                                    <div class="avatar add-avatar" (click)="addTask()">
                                         +
                                     </div>
                                 </div>
@@ -104,7 +103,6 @@
                                 <div class="progress-text">{{ item.progress }}% <p class="progress-p">{{
                                         item.tasks.length }}Task</p>
                                 </div>
-                                <!-- <div class="progress-text">{{ item.tasks.length }}</div> -->
                             </div>
                         </div>
                     </div>

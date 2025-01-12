@@ -31,7 +31,7 @@ export class LogInComponent implements OnDestroy {
   }
 
   onLogin() {
-    sessionStorage.setItem('user', JSON.stringify(this.loginForm.value));
+    sessionStorage.setItem('user', this.loginForm.value);
     this.router.navigate(['/webApp']);
   }
 

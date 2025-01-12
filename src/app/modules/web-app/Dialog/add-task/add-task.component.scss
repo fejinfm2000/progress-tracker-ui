@@ -1,0 +1,35 @@
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    min-width: 20rem;
+    margin: 1rem;
+}
+
+.dialog-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+mat-icon {
+    color: #888;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+mat-icon:hover {
+    color: #7f74ef;
+}
+
+.action-button:hover {
+    background-color: #888;
+}
+
+.action-button {
+    padding: 0.5em;
+    color: #7f74ef;
+    border-color: #7f74ef;
+    border-radius: 3rem;
+    background-color: white;
+}
