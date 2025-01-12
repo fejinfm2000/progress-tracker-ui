@@ -1,4 +1,5 @@
 <div class="container">
+    <!-- header section -->
     <div class="home-header">
         <div class="profile-container">
             <div class="welcome-section">
@@ -9,7 +10,6 @@
                         experiences!</p>
                 </div>
             </div>
-
             <div class="header-action">
                 <div class="search-box">
                     <input type="text" class="search-input" placeholder="Search here..">
@@ -27,5 +27,83 @@
             </div>
 
         </div>
-
     </div>
+
+    <!-- overview section -->
+    <div class="container">
+        <div class="overview-section-container">
+            <mat-card *ngFor="let item of overview" class="team-member-card">
+                <mat-card-header>
+                    <mat-card-title>{{ item.count }}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="overview-section-subtitle">{{ item.title }}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <!-- Projress Overview -->
+    <div class="container">
+        <!-- Carousel Content and Buttons -->
+        <div class="carousel-content-sec">
+            <div>
+                <h5>Progress Overview</h5>
+            </div>
+            <div class="carousel-buttons">
+                <button class="carousel-button" (click)="prevSlide()">&#8249;</button>
+                <button class="carousel-button" (click)="nextSlide()">&#8250;</button>
+            </div>
+        </div>
+        <!-- Carousel Content -->
+        <div class="carousel-content">
+            <div class="carousel-item" *ngFor="let item of visibleItems">
+                <div class="carousel-item-container">
+                    <div>
+                        <h4>{{item.title}}</h4>
+                    </div>
+                    <div class="carousel-item-content">
+                        <div>
+                            <div class="carousel-item-content-sec">
+                                <p>Task</p>
+                                {{item.subTitle}}
+                                <div class="avatar-group">
+                                    <!-- Loop through avatars -->
+                                    <div class="avatar" *ngFor="let avatar of avatars; let i = index"
+                                        [style.zIndex]="avatars.length - i"
+                                        [style.marginLeft]="i !== 0 ? '-15px' : '0'">
+                                        <ng-container *ngIf="avatar.imageUrl; else initialsTemplate">
+                                            <img [src]="avatar.imageUrl" alt="Avatar" class="avatar-image" />
+                                        </ng-container>
+                                        <ng-template #initialsTemplate>
+                                            <span class="avatar-initials">{{ avatar.initials }}</span>
+                                        </ng-template>
+                                    </div>
+                                    <!-- Add New Avatar -->
+                                    <div class="avatar add-avatar" (click)="onAddAvatar()">
+                                        +
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- progress-circle -->
+                            <div class="progress-circle-container">
+                                <svg class="progress-circle" viewBox="0 0 36 36">
+                                    <!-- Background Circle -->
+                                    <circle class="progress-bg" cx="18" cy="18" r="16"></circle>
+                                    <!-- Progress Circle -->
+                                    <circle class="progress" cx="18" cy="18" r="16"
+                                        [attr.stroke-dasharray]="item.circumference"
+                                        [attr.stroke-dashoffset]="item.strokeDashoffset"></circle>
+                                </svg>
+                                <div class="progress-text">{{ item.progress }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

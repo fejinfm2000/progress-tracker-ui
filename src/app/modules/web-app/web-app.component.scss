@@ -1,5 +1,10 @@
 .sidenav-container {
     height: 100vh;
+    background-color: #edf1f4;
+}
+
+mat-sidenav {
+    background-color: #edf1f4;
 }
 
 .sidenav {
@@ -49,6 +54,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+
 }
 
 @media (max-width: 768px) {
@@ -64,6 +70,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
+        background-color: #edf1f4;
     }
 }
 
@@ -85,6 +92,7 @@
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        background-color: #edf1f4;
     }
 
     .horizontal-nav {
