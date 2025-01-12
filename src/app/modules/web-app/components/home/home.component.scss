@@ -314,6 +314,14 @@ button {
     color: #333;
 }
 
+.progress-p {
+    font-size: x-small;
+    margin-top: 0.1rem;
+}
+
+.profile-image {
+    width: 8rem;
+}
 
 // ======================
 
@@ -432,7 +440,7 @@ button {
         margin: 0rem 3rem 0rem 3rem;
     }
 
-    .search-box:hover > .search-input{
+    .search-box:hover>.search-input {
         width: 16rem;
         padding: 0 0.4rem;
     }

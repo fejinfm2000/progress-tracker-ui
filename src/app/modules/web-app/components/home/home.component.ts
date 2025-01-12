@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   visibleItems: IProjectOverView[] = [];
   activeIndex = 0;
   progress = 50;
+  randomNumber: number = 0;
+  profileUrl!: string;
 
   overview: IOverview[] = [
     { count: 64, title: 'Total Project' }, { count: 14, title: 'Ongoing Project' }, { count: 4, title: 'In Progress' },
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.updateVisibleItems();
     this.generateInitialsForAvatars();
-
+    this.generateRandomNumber();
   }
 
   generateInitialsForAvatars() {
@@ -89,4 +91,10 @@ export class HomeComponent implements OnInit {
       this.items[nextIndex],
     ];
   }
+
+  generateRandomNumber(): void {
+    this.randomNumber = Math.floor(Math.random() * 10) + 1;
+    this.profileUrl = "assets/images/profile" + this.randomNumber + ".webp";
+  }
+
 }

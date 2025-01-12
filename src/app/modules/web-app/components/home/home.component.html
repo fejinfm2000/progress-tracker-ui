@@ -3,7 +3,11 @@
     <div class="home-header">
         <div class="profile-container">
             <div class="welcome-section">
-                <div class="profile">Hi</div>
+                <!-- <div class="profile"> -->
+                <div>
+                    <img class="profile-image" [src]="profileUrl" alt="">
+                    <!-- <img class="profile-image" src="assets/images/profile1.webp" alt=""> -->
+                </div>
                 <div class="welcome-message-section">
                     <p class="welcome-message">Welcome to My Profile!</p>
                     <p class="user-info">Hi, I'm {{ name }}. I love creating responsive designs and building awesome web
@@ -97,7 +101,10 @@
                                         [attr.stroke-dasharray]="item.circumference"
                                         [attr.stroke-dashoffset]="item.strokeDashoffset"></circle>
                                 </svg>
-                                <div class="progress-text">{{ item.progress }}%</div>
+                                <div class="progress-text">{{ item.progress }}% <p class="progress-p">{{
+                                        item.tasks.length }}Task</p>
+                                </div>
+                                <!-- <div class="progress-text">{{ item.tasks.length }}</div> -->
                             </div>
                         </div>
                     </div>
@@ -105,5 +112,5 @@
             </div>
         </div>
     </div>
-    
+
 </div>
