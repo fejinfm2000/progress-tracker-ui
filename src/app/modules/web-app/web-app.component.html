@@ -1,14 +1,19 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="side" opened class="sidenav">
     <!-- Vertical Navigation -->
-    <nav class="vertical-nav">
-      <img src="assets/images/tracker-logo.png" class="icon" alt="asas">
-      <a routerLink="/webApp/home"><i class="material-icons">home</i></a>
-      <a routerLink="/webApp/login"><i class="fa-regular fa-calendar-days"></i></a>
-      <a routerLink="/webApp/login"><i class="fa-solid fa-list-check"></i></a>
-      <a routerLink="/webApp/login"><i class="fa-solid fa-user"></i> </a>
-      <a routerLink="/webApp/login"><i class="fa-regular fa-message"></i> </a>
-      <a routerLink="/webApp/login"><i class="fa-solid fa-gear"></i> </a>
+    <nav class="vertical-nav-container">
+      <div class="vertical-nav">
+        <img src="assets/images/logo1.png" class="icon" alt="asas">
+        <a routerLink="/webApp/home"><i class="material-icons">home</i></a>
+        <a routerLink="/webApp/login"><i class="fa-regular fa-calendar-days"></i></a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-list-check"></i></a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-user"></i> </a>
+      </div>
+
+      <div class="vertical-nav">
+        <a routerLink="/webApp/login"><i class="fa-regular fa-message"></i> </a>
+        <a routerLink="/webApp/login"><i class="fa-solid fa-gear"></i> </a>
+      </div>
     </nav>
   </mat-sidenav>
 
@@ -16,7 +21,7 @@
     <!-- Horizontal Navigation -->
     <div class="hor-nav">
       <nav class="horizontal-nav">
-        <img src="assets/images/tracker-logo.png" class="icon" alt="asas">
+        <img src="assets/images/logo1.png" class="icon" alt="asas">
         <a routerLink="/webApp/home"><i class="material-icons">home</i></a>
         <a routerLink="/webApp/login"><i class="fa-regular fa-calendar-days"></i></a>
         <a routerLink="/webApp/login"><i class="fa-solid fa-list-check"></i></a>

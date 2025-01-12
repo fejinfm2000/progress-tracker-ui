@@ -21,7 +21,18 @@ mat-sidenav {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
     gap: 2rem;
+}
+
+.vertical-nav {
+    margin-top: 1rem;
+}
+
+.vertical-nav-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12rem;
 }
 
 .horizontal-nav {
