@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { IOverview, IProjectOverView } from '../../models/web-app';
 import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
+  MatDialog
 } from '@angular/material/dialog';
 import { LogInComponent } from '../../../auth/components/log-in/log-in.component';
 import { AddTaskComponent } from '../../Dialog/add-task/add-task.component';
 import { IUser } from '../../../auth/models/auth';
 import { SessionStorageService } from '../../../../services/session-storage.service';
+import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
+
+Chart.register(...registerables);
+
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -20,7 +18,7 @@ import { SessionStorageService } from '../../../../services/session-storage.serv
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   name: string = 'Buddy';
   newTask: string = '';
   tasks: string[] = [];
@@ -33,6 +31,18 @@ export class HomeComponent implements OnInit {
   progress = 50;
   randomNumber: number = 0;
   profileUrl!: string;
+
+  chartHeaderData: { time: number, title: string }[] = [
+    { time: 17, title: "Time Spent" },
+    { time: 12, title: "Lesson Learn" },
+    { time: 24, title: "Goal reached" },
+  ];
+
+  dailyTaskData: { time: number, startTime: number, endTime: number, title: string }[] = [
+    { time: 9, title: "Optimize Server Response", startTime: 9, endTime: 10 },
+    { time: 10, title: "Ensure a responsive Design", startTime: 10, endTime: 11 },
+    { time: 11, title: "Optimize Server Response", startTime: 11, endTime: 12 }
+  ];
 
   overview: IOverview[] = [
     { count: 64, title: 'Total Project' }, { count: 14, title: 'Ongoing Project' }, { count: 4, title: 'In Progress' },
@@ -53,6 +63,9 @@ export class HomeComponent implements OnInit {
     { name: 'Other', imageUrl: '', initials: 'MB' },
 
   ];
+
+  @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
+  barChart: Chart | undefined;
 
   constructor(private matDialog: MatDialog, private sessionStorageService: SessionStorageService) { }
 
@@ -130,6 +143,62 @@ export class HomeComponent implements OnInit {
   generateRandomNumber(): void {
     this.randomNumber = Math.floor(Math.random() * 10) + 1;
     this.profileUrl = "assets/images/profile" + this.randomNumber + ".webp";
+  }
+
+  ngAfterViewInit(): void {
+    this.renderChart();
+  }
+
+  public barChartData = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        label: 'Sales',
+        data: [6, 9, 8, 8, 6, 2, 3],
+        backgroundColor: [
+          'rgba(153, 102, 255, 1)',
+        ],
+        borderWidth: 0,
+        barThickness: 10,
+        borderRadius: 10,
+      },
+    ],
+  };
+
+  // Chart options
+  public barChartOptions = {
+    responsive: true,
+    scales: {
+      x: {
+        categoryPercentage: 0.6,  // Adjust the space for categories
+        barPercentage: 0.4,       // Adjust the width of bars
+        grid: {
+          display: false,  // Hide the grid lines for the x-axis
+        },
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          display: true,  // Display the grid lines for the y-axis
+          color: '#ddd',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: false,  // Hide the legend
+      },
+    },
+  };
+
+  renderChart(): void {
+    const chartConfig: ChartConfiguration<ChartType> = {
+      type: 'bar',
+      data: this.barChartData,
+      options: this.barChartOptions
+    };
+
+    this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
   }
 
 }

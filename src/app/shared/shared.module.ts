@@ -32,7 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSidenavModule,
     FormsModule,
     MatDialogModule
-  ],
+    ],
   exports: [
     MatButtonModule,
     MatToolbarModule,

@@ -138,5 +138,47 @@
             </div>
         </div>
     </div>
+    <!-- chart -->
+    <div class="chart-main-container">
+        <!-- Bar chart  -->
+        <div class="chart-container">
+            <h5>Task Progress</h5>
+            <mat-card class="team-member-card">
+                <div class="chart-card-title">
+                    <div *ngFor="let item of chartHeaderData">
+                        <h4>{{item.time}}h</h4>
+                        <p class="chart-p">{{item.title}}</p>
+                    </div>
+                </div>
+                <mat-card-content>
+                    <canvas #barCanvas></canvas>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <!-- Daily Task -->
+        <div class="daily-task-container">
+            <h5>Daily Task</h5>
+            <mat-card class="team-member-card">
+                <mat-card-content class="daily-task-content">
+                    <div *ngFor="let item of dailyTaskData">
+
+                        <div class="daily-task-sec-time">
+                            {{item.time}}am
+                        </div>
+                        <div class="daily-task-sec">
+                            <div>
+                                <p class="daily-task-p">{{item.title}}</p>
+                            </div>
+                            <div>
+                                <p class="daily-task-p">{{item.startTime}}to {{item.endTime}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
 
 </div>
