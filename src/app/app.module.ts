@@ -13,6 +13,7 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { webInterceptor } from './core/interceptors/web.interceptor';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { SharedModule } from './shared/shared.module';
+import { webAppInterceptor } from './core/interceptors/web-app.interceptor';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
-    provideHttpClient(withFetch(), withInterceptors([webInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([webInterceptor, webAppInterceptor])),
 
   ],
   bootstrap: [AppComponent]

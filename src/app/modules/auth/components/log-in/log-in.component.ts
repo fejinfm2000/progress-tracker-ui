@@ -32,7 +32,10 @@ export class LogInComponent implements OnDestroy {
 
   onLogin() {
     sessionStorage.setItem('user', JSON.stringify(this.loginForm.value));
-    this.router.navigate(['/webApp']);
+    this.authService.isUserPersent(this.loginForm.value).pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
+      if (data)
+        this.router.navigate(['/webApp']);
+    })
   }
 
   ngOnDestroy(): void {

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { IUser } from '../models/auth';
@@ -15,6 +15,10 @@ export class AuthService {
 
   addUser(user: IUser): Observable<IUser> {
     return this.http.patch<IUser>(this.apiUrl + `/addUser`, user);
+  }
+
+  isUserPersent(user: IUser) {
+    return this.http.get(this.apiUrl + `/isUserPersent?email=${user.email}&passwordHash=${user.passwordHash}`);
   }
 
 }

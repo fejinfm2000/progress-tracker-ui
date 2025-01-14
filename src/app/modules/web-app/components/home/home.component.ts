@@ -197,6 +197,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       data: this.barChartData,
       options: this.barChartOptions
     };
+    if (!chartConfig) {
+      console.error('Canvas element not found');
+      return;
+    }
 
     this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
   }

@@ -4,7 +4,7 @@ import { inject } from '@angular/core';
 import { finalize } from 'rxjs';
 
 export const webInterceptor: HttpInterceptorFn = (req, next) => {
-  console.log("InterCeptor");
+  console.log("webInterceptor");
   const spinnerService = inject(SpinnerService);
   const modifiedReq = req.clone({
     setHeaders: {
