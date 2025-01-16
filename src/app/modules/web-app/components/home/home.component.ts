@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { IOverview, IProjectOverView } from '../../models/web-app';
 import {
   MatDialog
@@ -8,6 +8,7 @@ import { AddTaskComponent } from '../../Dialog/add-task/add-task.component';
 import { IUser } from '../../../auth/models/auth';
 import { SessionStorageService } from '../../../../services/session-storage.service';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
+import { isPlatformBrowser } from '@angular/common';
 
 Chart.register(...registerables);
 
@@ -67,7 +68,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
   barChart: Chart | undefined;
 
-  constructor(private matDialog: MatDialog, private sessionStorageService: SessionStorageService) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object ,private matDialog: MatDialog, private sessionStorageService: SessionStorageService) { }
 
   ngOnInit(): void {
     let userData: IUser;
@@ -137,7 +138,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.visibleItems = [
       this.items[this.activeIndex],
       this.items[nextIndex],
-    ];
+    ];    
   }
 
   generateRandomNumber(): void {
@@ -146,7 +147,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.renderChart();
+    setTimeout(() => {
+      if(isPlatformBrowser(this.platformId)){
+        this.renderChart();
+      }
+    }, 1000);
   }
 
   public barChartData = {
@@ -197,12 +202,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
       data: this.barChartData,
       options: this.barChartOptions
     };
+    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     if (!chartConfig) {
       console.error('Canvas element not found');
       return;
     }
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        console.error('Canvas context not found');
+        return;
+    }
+    this.barChart=new Chart(ctx, chartConfig);
 
-    this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
+    // this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
   }
 
 }

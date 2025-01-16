@@ -23,6 +23,8 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 
+  @media (min-width: 768px) {
+
   /* width */
   ::-webkit-scrollbar {
     width: 0.5rem;
@@ -44,6 +46,7 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #7f74ef;
   }
+}
 }
 
 button {
