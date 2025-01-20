@@ -6,17 +6,23 @@ import { finalize } from 'rxjs';
 export const webInterceptor: HttpInterceptorFn = (req, next) => {
   console.log("webInterceptor");
   const spinnerService = inject(SpinnerService);
+  const skipSpinner = req.headers.has('Skip-Spinner');
+
   const modifiedReq = req.clone({
+    headers: req.headers.delete('Skip-Spinner'),
     setHeaders: {
       Authorization: 'Bearer my-token', // Dynamically inject the token
     },
   });
-
-  spinnerService.show();
+  if (!skipSpinner) {
+    spinnerService.show();
+  }
 
   return next(modifiedReq).pipe(
     finalize(() => {
-      spinnerService.hide();
+      if (!skipSpinner) {
+        spinnerService.hide();
+      }
     })
   );
 };

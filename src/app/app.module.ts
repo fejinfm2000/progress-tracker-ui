@@ -14,6 +14,7 @@ import { webInterceptor } from './core/interceptors/web.interceptor';
 import { SpinnerComponent } from './shared/components/spinner/spinner.component';
 import { SharedModule } from './shared/shared.module';
 import { webAppInterceptor } from './core/interceptors/web-app.interceptor';
+import { provideNativeDateAdapter } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { webAppInterceptor } from './core/interceptors/web-app.interceptor';
     SharedModule
   ],
   providers: [
+    provideNativeDateAdapter(),
     provideClientHydration(withEventReplay()),
     provideAnimationsAsync(),
     provideHttpClient(withFetch(), withInterceptors([webInterceptor, webAppInterceptor])),

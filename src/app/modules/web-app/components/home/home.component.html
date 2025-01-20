@@ -92,24 +92,22 @@
                 <div class="carousel-item-container">
                     <div>
                         <h4>{{item.title}}</h4>
+                        <p class="item-des">{{item.description}}</p>
                     </div>
                     <div class="carousel-item-content">
-                        <div>
+                        <div class="carousel-item-con">
                             <div class="carousel-item-content-sec">
-                                <p>Task</p>
-                                {{item.subTitle}}
+                                <h4 class="carousel-item-subTitle">{{item.subTitle}}</h4>
                                 <div class="avatar-group">
                                     <!-- Loop through avatars -->
-                                    <div class="avatar" *ngFor="let avatar of avatars; let i = index"
-                                        [style.zIndex]="avatars.length - i"
+                                    <div class="avatar" *ngFor="let avatar of item.tasks; let i = index"
+                                        [style.zIndex]="avatars.length - i ? '2':'5'"
                                         [style.marginLeft]="i !== 0 ? '-15px' : '0'">
-                                        <ng-container *ngIf="avatar.imageUrl; else initialsTemplate">
-                                            <img [src]="avatar.imageUrl" alt="Avatar" class="avatar-image" />
+                                        <ng-container *ngIf="avatar.taskName">
+                                            <span class="avatar-initials">{{ avatar.taskInitials }}</span>
                                         </ng-container>
-                                        <ng-template #initialsTemplate>
-                                            <span class="avatar-initials">{{ avatar.initials }}</span>
-                                        </ng-template>
                                     </div>
+
                                     <!-- Add New Avatar -->
                                     <div class="avatar add-avatar" (click)="addTask()">
                                         +

@@ -13,6 +13,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [],
@@ -31,7 +33,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     MatSidenavModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule
     ],
   exports: [
     MatButtonModule,
@@ -48,7 +52,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterModule,
     MatSidenavModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule,
+    MatDatepickerModule
 
   ]
 })

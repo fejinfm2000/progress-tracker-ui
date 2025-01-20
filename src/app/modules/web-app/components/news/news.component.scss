@@ -1,0 +1,45 @@
+.news-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  width: 90%;
+}
+
+.news-item h2 {
+  margin: 0 0 10px;
+}
+
+.news-item a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.news-item a:hover {
+  text-decoration: underline;
+}
+
+
+
+@media (min-width: 768px) {
+  .welcome-message {
+    font-size: 1.5em;
+  }
+
+  .container {
+    margin-left: 2rem;
+  }
+}
+
+
+
+@media (max-width: 769px) {
+  .container {
+    margin-top: 4rem;
+  }
+
+  .news-item {
+    margin: 1rem;
+  }
+}

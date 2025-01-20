@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LogInComponent } from '../auth/components/log-in/log-in.component';
 import { HomeComponent } from './components/home/home.component';
 import { AddTaskComponent } from './Dialog/add-task/add-task.component';
+import { NewsComponent } from './components/news/news.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
       {
         path: 'home',
         component: HomeComponent
+      },
+      {
+        path: 'news',
+        component: NewsComponent
       },
       {
         path: '',
@@ -30,7 +35,8 @@ const routes: Routes = [
   declarations: [
     WebAppComponent,
     HomeComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    NewsComponent
   ],
   imports: [
     RouterModule.forChild(routes),

@@ -6,11 +6,119 @@
 </div>
 
 <div mat-dialog-content>
-    <p>This is the content of the dialog.</p>
-</div>
+    <div *ngIf="addTaskForm" [formGroup]="addTaskForm">
+        <div class="add-task-container">
+            <div class="add-task-template">
+                <!-- Category Field -->
+                <mat-form-field appearance="outline">
+                    <mat-label>Category Name</mat-label>
+                    <mat-select formControlName="categoryName">
+                        <mat-option *ngFor="let category of categoryDropdown"
+                            value="category.key">{{category.value}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addTaskForm.controls['categoryName'].hasError('required')">
+                        Category Name is required
+                    </mat-error>
+                </mat-form-field>
 
-<div mat-dialog-actions>
-    <button mat-stroked-button>
-        <p class="header-button">Save</p>
-    </button>
+                <!-- Email Field -->
+                <mat-form-field class="custom-field" appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" />
+                    <mat-error *ngIf="addTaskForm.controls['email'].hasError('required')">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="addTaskForm.controls['email'].hasError('email')">
+                        Enter a valid email address
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="add-task-template">
+                <!-- activityName Field -->
+                <mat-form-field class="custom-field" appearance="outline">
+                    <mat-label>Activity Name</mat-label>
+                    <input matInput formControlName="activityName" />
+                    <mat-error *ngIf="addTaskForm.controls['activityName'].hasError('required')">
+                        Activity Name is required
+                    </mat-error>
+                </mat-form-field>
+
+                <!-- description Field -->
+                <mat-form-field class="custom-field" appearance="outline">
+                    <mat-label>Description</mat-label>
+                    <input matInput formControlName="description" />
+                    <mat-error *ngIf="addTaskForm.controls['description'].hasError('required')">
+                        Description is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="add-task-template">
+                <!-- startDate Field -->
+                <div class="date-input-fields">
+                    <mat-form-field class="date-input" appearance="outline">
+                        <mat-label>Start Date</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="startDate">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+
+                    <!-- endDate Field -->
+                    <mat-form-field class="date-input" appearance="outline">
+                        <mat-label>End Date</mat-label>
+                        <input matInput [matDatepicker]="endpicker" formControlName="endDate"
+                            [matDatepickerFilter]="dateFilter">
+                        <mat-datepicker-toggle matIconSuffix [for]="endpicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endpicker></mat-datepicker>
+                        <mat-error *ngIf="addTaskForm.controls['endDate'].hasError('required')">
+                            End Date is required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+
+
+
+            </div>
+
+            <div class="add-task-template">
+                <!-- progress Field -->
+                <mat-form-field class="custom-field" appearance="outline">
+                    <mat-label>Progress In Precentage</mat-label>
+                    <input matInput formControlName="progress" />
+                </mat-form-field>
+
+                <!-- Status Field -->
+                <mat-form-field class="custom-field" appearance="outline">
+                    <mat-label>Status</mat-label>
+                    <input matInput formControlName="status" />
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="subActivitiesFormArray" formArrayName="subActivities">
+                <div class="add-task-template-array"
+                    *ngFor="let textInput of subActivitiesFormArray.controls; let i = index">
+                    <mat-form-field class="example-textbox" appearance="outline">
+                        <mat-label>Sub Task {{ i + 1 }}</mat-label>
+                        <input matInput [formControlName]="i" placeholder="Enter task name">
+                        <!-- Icon inside the text box -->
+                        <button [ngClass]="{'delete-disable':i==0}" mat-icon-button matSuffix color="warn"
+                            (click)="removeTextInput(i)">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+
+
+            <div class="add-task-template save-button">
+                <button mat-stroked-button (click)="addTextInput()">
+                    <p class="header-button">Add Sub Task</p>
+                </button>
+                <button mat-stroked-button (click)="onSave()">
+                    <p class="header-button">Save</p>
+                </button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -293,16 +293,22 @@ button {
 }
 
 .progress-bg {
-    stroke: #7f74ef;
-    stroke-linecap: round;
+    stroke: white;
     transition: stroke-dashoffset 0.35s;
     transform-origin: center;
     border: #333;
 }
 
 .progress {
-    stroke: white;
+    stroke: #7f74ef;
     border: #333;
+    stroke-linecap: round;
+}
+
+.item-des {
+    margin: 0rem;
+    font-size: smaller;
+    color: gray;
 }
 
 .progress-text {
@@ -313,6 +319,15 @@ button {
     font-size: 16px;
     font-weight: bold;
     color: #333;
+}
+
+.carousel-item-subTitle {
+    margin-bottom: 1rem;
+}
+
+.carousel-item-con {
+    display: flex;
+    align-items: center;
 }
 
 .progress-p {

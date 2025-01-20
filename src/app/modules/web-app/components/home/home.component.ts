@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
-import { IOverview, IProjectOverView } from '../../models/web-app';
+import { IAvatharTask, IOverview, IProjectOverView } from '../../models/web-app';
 import {
   MatDialog
 } from '@angular/material/dialog';
@@ -9,6 +9,8 @@ import { IUser } from '../../../auth/models/auth';
 import { SessionStorageService } from '../../../../services/session-storage.service';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 import { isPlatformBrowser } from '@angular/common';
+import { HomeService } from '../../services/home.service';
+import { IUserActivities } from '../../models/home';
 
 Chart.register(...registerables);
 
@@ -32,7 +34,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   progress = 50;
   randomNumber: number = 0;
   profileUrl!: string;
-
+  isSidebarOpen = false;
+  barChart: Chart | undefined;
+  @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
+  userActivities!: IUserActivities;
   chartHeaderData: { time: number, title: string }[] = [
     { time: 17, title: "Time Spent" },
     { time: 12, title: "Lesson Learn" },
@@ -51,39 +56,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   items: IProjectOverView[] = [
-    { title: 'Title1', subTitle: 'Sub Title1', circumference: 40, progress: 40, strokeDashoffset: 40, tasks: [{ taskId: 1, taskName: 'Task Name 1' }] },
-    { title: 'Title2', subTitle: 'Sub Title2', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 2, taskName: 'Task Name 2' }] },
-    { title: 'Title3', subTitle: 'Sub Title3', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 3, taskName: 'Task Name 3' }] },
-    { title: 'Title4', subTitle: 'Sub Title4', circumference: 80, progress: 80, strokeDashoffset: 80, tasks: [{ taskId: 4, taskName: 'Task Name 4' }] },
-    { title: 'Title5', subTitle: 'Sub Title5', circumference: 95, progress: 95, strokeDashoffset: 95, tasks: [{ taskId: 5, taskName: 'Task Name 5' }] },
+    // { title: 'Title1', subTitle: 'Sub Title1', circumference: 40, progress: 40, strokeDashoffset: 40, tasks: [{ taskId: 1, taskName: 'Task Name 1' }] },
+    // { title: 'Title2', subTitle: 'Sub Title2', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 2, taskName: 'Task Name 2' }] },
+    // { title: 'Title3', subTitle: 'Sub Title3', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 3, taskName: 'Task Name 3' }] },
+    // { title: 'Title4', subTitle: 'Sub Title4', circumference: 80, progress: 80, strokeDashoffset: 80, tasks: [{ taskId: 4, taskName: 'Task Name 4' }] },
+    // { title: 'Title5', subTitle: 'Sub Title5', circumference: 95, progress: 95, strokeDashoffset: 95, tasks: [{ taskId: 5, taskName: 'Task Name 5' }] },
   ];
 
-  avatars = [
-    { name: 'Fejin', imageUrl: '', initials: 'JD' },
-    { name: 'Fevin', imageUrl: 'assets/images/tracker-logo.png', initials: '' },
-    { name: 'Other', imageUrl: '', initials: 'MB' },
+  avatars: IAvatharTask[] = [
+    // { name: 'Fejin', imageUrl: '', initials: 'JD' },
+    // { name: 'Fevin', imageUrl: 'assets/images/tracker-logo.png', initials: '' },
+    // { name: 'Other', imageUrl: '', initials: 'MB' },
 
   ];
 
-  @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
-  barChart: Chart | undefined;
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object ,private matDialog: MatDialog, private sessionStorageService: SessionStorageService) { }
-
-  ngOnInit(): void {
-    let userData: IUser;
-    let sessionData = this.sessionStorageService.getItem('user');
-    if (sessionData) {
-      userData = sessionData
-      this.name = userData.firstName
-    }
-
-    this.updateVisibleItems();
-    this.generateInitialsForAvatars();
-    this.generateRandomNumber();
-  }
-
-  isSidebarOpen = false;
   notifications = [
     'You have a new message from John.',
     'Reminder: Meeting at 3 PM today.',
@@ -91,16 +77,54 @@ export class HomeComponent implements OnInit, AfterViewInit {
     'New comment on your post.',
   ];
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private matDialog: MatDialog, private sessionStorageService: SessionStorageService,
+    private homeService: HomeService) { }
+
+  ngOnInit(): void {
+    let userData: IUser;
+    let sessionData = this.sessionStorageService.getItem('user');
+    if (sessionData) {
+      userData = sessionData;
+      this.name = userData.firstName;
+      this.getUserTaskDetails(userData.email);
+    }
+    this.generateRandomNumber();
+  }
+
+  getUserTaskDetails(email: string) {
+    this.homeService.getAllUserTaskDetails(email).subscribe(data => {
+      console.log(data);
+      this.userActivities = data;
+      this.items = this.userActivities.activity.map(activity => {
+        return {
+          title: activity.category.categoryName,
+          subTitle: activity.activityName,
+          description: activity.description,
+          tasks: this.generateInitialsForAvatars(this.userActivities.subActivity.map(subActivity => {
+            return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
+          })),
+          circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
+          progress: 60,
+          strokeDashoffset: (1 - 60 / 100) * (2 * Math.PI * 16)
+        }
+      })
+      this.updateVisibleItems();
+
+    });
+
+  }
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  generateInitialsForAvatars() {
-    this.avatars = this.avatars.map((avatar) => ({
+  generateInitialsForAvatars(avatharList: IAvatharTask[]) {
+    console.log(avatharList);
+
+    return avatharList.map((avatar) => ({
       ...avatar,
-      initials: avatar.imageUrl
+      taskInitials: avatar.imageUrl
         ? ''
-        : avatar.name
+        : avatar.taskName
           .split(' ')
           .map((part) => part.charAt(0).toUpperCase())
           .join(''),
@@ -138,7 +162,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.visibleItems = [
       this.items[this.activeIndex],
       this.items[nextIndex],
-    ];    
+    ];
   }
 
   generateRandomNumber(): void {
@@ -148,7 +172,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if(isPlatformBrowser(this.platformId)){
+      if (isPlatformBrowser(this.platformId)) {
         this.renderChart();
       }
     }, 1000);
@@ -209,10 +233,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     const ctx = canvas.getContext('2d');
     if (!ctx) {
-        console.error('Canvas context not found');
-        return;
+      console.error('Canvas context not found');
+      return;
     }
-    this.barChart=new Chart(ctx, chartConfig);
+    this.barChart = new Chart(ctx, chartConfig);
 
     // this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
   }
