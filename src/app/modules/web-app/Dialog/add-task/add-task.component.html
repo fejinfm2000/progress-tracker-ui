@@ -38,11 +38,18 @@
                 <!-- activityName Field -->
                 <mat-form-field class="custom-field" appearance="outline">
                     <mat-label>Activity Name</mat-label>
-                    <input matInput formControlName="activityName" />
+                    <input matInput [matAutocomplete]="auto" formControlName="activityName"
+                        (ngModelChange)="onInputChange($event)" placeholder="Type or select" />
                     <mat-error *ngIf="addTaskForm.controls['activityName'].hasError('required')">
                         Activity Name is required
                     </mat-error>
                 </mat-form-field>
+
+                <mat-autocomplete #auto="matAutocomplete">
+                    <mat-option *ngFor="let option of filteredOptions" [value]="option">
+                        {{ option }}
+                    </mat-option>
+                </mat-autocomplete>
 
                 <!-- description Field -->
                 <mat-form-field class="custom-field" appearance="outline">

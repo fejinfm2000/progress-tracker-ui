@@ -81,7 +81,7 @@
             <div>
                 <h5>Progress Overview</h5>
             </div>
-            <div class="carousel-buttons">
+            <div class="carousel-buttons" *ngIf="isCarouselButton">
                 <button class="carousel-button" (click)="prevSlide()">&#8249;</button>
                 <button class="carousel-button" (click)="nextSlide()">&#8250;</button>
             </div>
@@ -101,7 +101,7 @@
                                 <div class="avatar-group">
                                     <!-- Loop through avatars -->
                                     <div class="avatar" *ngFor="let avatar of item.tasks; let i = index"
-                                        [style.zIndex]="avatars.length - i ? '2':'5'"
+                                        [style.zIndex]="item.tasks.length - i ? '':''"
                                         [style.marginLeft]="i !== 0 ? '-15px' : '0'">
                                         <ng-container *ngIf="avatar.taskName">
                                             <span class="avatar-initials">{{ avatar.taskInitials }}</span>
@@ -109,7 +109,7 @@
                                     </div>
 
                                     <!-- Add New Avatar -->
-                                    <div class="avatar add-avatar" (click)="addTask()">
+                                    <div class="avatar add-avatar" (click)="addTask(item)">
                                         +
                                     </div>
                                 </div>

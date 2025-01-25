@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   profileUrl!: string;
   isSidebarOpen = false;
   barChart: Chart | undefined;
+  isCarouselButton: boolean = false;
   @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
   userActivities!: IUserActivities;
   chartHeaderData: { time: number, title: string }[] = [
@@ -107,14 +108,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
         title: activity.category.categoryName,
         subTitle: activity.activityName,
         description: activity.description,
-        tasks: this.generateInitialsForAvatars(this.userActivities.subActivity.map(subActivity => {
-          return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
-        })),
+        repitation: this.userActivities?.subActivity?.length || 0,
+        tasks: this.taskIteration(this.userActivities).slice(0, 3),
         circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
-        progress: 60,
-        strokeDashoffset: (1 - 60 / 100) * (2 * Math.PI * 16)
+        progress: activity.progress,
+        strokeDashoffset: (1 - activity.progress || 0 / 100) * (2 * Math.PI * 16)
       }
     })
+  }
+
+  taskIteration(userActivities: IUserActivities) {
+    let subActivity = this.generateInitialsForAvatars(userActivities.subActivity.map(subActivity => {
+      return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
+    }))
+    return subActivity
   }
 
   setDetails() {
@@ -127,14 +134,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setNewTask() {
     if (this.items.length == 0) {
       this.items = [
-        { title: 'Task 1', description: 'create your task', subTitle: 'Sub Task 1', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
-        { title: 'Task 2', description: 'create your task', subTitle: 'Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
+        { title: 'Create Task 1', description: 'create your task', subTitle: 'Create Sub Task 1', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
+        { title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
       ];
     } else if (this.items.length == 1) {
       this.items.push(
-        { title: 'Task 2', description: 'create your task', subTitle: 'Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] }
+        { title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] }
       )
     }
+    this.isCarouselButton = this.items.length > 2;
   }
 
 
@@ -143,8 +151,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   generateInitialsForAvatars(avatharList: IAvatharTask[]) {
-    console.log(avatharList);
-
     return avatharList.map((avatar) => ({
       ...avatar,
       taskInitials: avatar.imageUrl
@@ -156,14 +162,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }));
   }
 
-  addTask(): void {
-    this.openDialog();
+  addTask(currentActivity?: IProjectOverView): void {
+    this.openDialog(currentActivity);
   }
 
-  openDialog(): void {
+  openDialog(currentActivity?: IProjectOverView): void {
     const dialogRef = this.matDialog.open(AddTaskComponent, {
       disableClose: true,
-      data: { email: this.email }
+      data: { email: this.email, userActivities: this.userActivities, currentActivity }
     });
 
     dialogRef.afterClosed().subscribe(result => {

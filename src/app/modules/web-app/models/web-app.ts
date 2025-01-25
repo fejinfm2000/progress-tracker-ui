@@ -14,6 +14,7 @@ export interface IProjectOverView {
     circumference: number,
     strokeDashoffset: number,
     progress: number,
+    repitation?: number,
     tasks: IAvatharTask[]
 
 }

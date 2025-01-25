@@ -6,6 +6,7 @@ export interface ISubActivity {
     endDate: string;
     progress: number;
     status: string;
+    activity?: IActivity;
 
 }
 export interface ICategory {
@@ -21,7 +22,7 @@ export interface IActivity {
     startDate: string;
     endDate: string;
     status: string;
-    progress: string;
+    progress: number;
     category: ICategory;
     createdAt: string;
 }
