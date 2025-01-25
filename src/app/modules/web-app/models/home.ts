@@ -36,6 +36,17 @@ export interface IUserActivities {
     subActivity: ISubActivity[];
 }
 
+export interface IActivityDetails {
+    categoryName?: string;
+    email?: string;
+    activityName?: string;
+    description?: string;
+    subActivities?: string[];
+    startDate?: string;
+    endDate?: string;
+    status?: string;
+    progress?: number;
+}
 export interface IKeyValuePair {
     key: string,
     value: string

@@ -5,8 +5,9 @@
                 <img class="image" src="/assets/images/login.avif" alt="login">
             </div>
             <div class="form-container">
-                <div>
+                <div class="login-tit-con">
                     <h1 class="account-tit">Login</h1>
+                    <p class="login-p">Do you have account? <a href="/auth/signup">Create an Account</a></p>
                 </div>
 
                 <div [formGroup]="loginForm">
@@ -53,7 +54,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <a href="hai">Forgot Password?</a>
+                    <a class="forget-pass" (click)="navigation()">Forgot Password?</a>
                     <!-- Submit Button -->
 
                     <div class="button-row">

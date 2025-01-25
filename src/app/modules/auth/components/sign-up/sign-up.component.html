@@ -4,9 +4,12 @@
             <div class="background">
             </div>
             <div class="form-container">
-                <div>
+                <div *ngIf="!updateFlag">
                     <h1 class="account-tit">Create an account</h1>
                     <p class="login-p">Already have a Account? <a href="/auth/login">Log in</a></p>
+                </div>
+                <div *ngIf="updateFlag" class="pass-title">
+                    <h1 class="account-tit">Password Update</h1>
                 </div>
 
 
@@ -14,7 +17,7 @@
 
                     <div class="form-row">
                         <!-- Name Field -->
-                        <div class="name-row">
+                        <div class="name-row" *ngIf="!updateFlag">
                             <div>
                                 <mat-form-field class="custom-field" appearance="outline">
                                     <mat-label>First Name</mat-label>
@@ -54,8 +57,9 @@
                                 Please enter your password
                             </mat-error>
                         </mat-form-field>
-                        <mat-checkbox formControlName="termsAndConditionFlag" class="example-margin">
-                            <p>I agree to the <a href="hai">Terms &
+                        <mat-checkbox *ngIf="!updateFlag" formControlName="termsAndConditionFlag"
+                            class="example-margin">
+                            <p>I agree to the <a href="hai" class="link">Terms &
                                     conditions</a></p>
                         </mat-checkbox>
                     </div>
@@ -64,7 +68,7 @@
 
                     <div class="button-row">
                         <button (click)="onAccountCreation()" mat-stroked-button [disabled]="signupForm.invalid">
-                            <p class="header-button">Create account</p>
+                            <p class="header-button">{{updateFlag? 'Update password':'Create account'}} </p>
                         </button>
                     </div>
                 </div>

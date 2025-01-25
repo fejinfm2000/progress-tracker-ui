@@ -15,7 +15,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class SignUpComponent implements OnDestroy {
   signupForm: FormGroup;
   unSubscribe$ = new Subject();
-
+  updateFlag: boolean = false;
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.signupForm = this.fb.group({
       firstName: [null, Validators.required],
@@ -24,10 +24,21 @@ export class SignUpComponent implements OnDestroy {
       passwordHash: [null, Validators.required],
       termsAndConditionFlag: [false],
     });
+    const navigation = this.router.getCurrentNavigation();
+    let stateData = navigation?.extras.state
+    if (stateData) {
+      this.updateFlag = stateData['updateFlag']
+      if (this.updateFlag) {
+        this.signupForm.get('firstName')?.removeValidators(Validators.required);
+        this.signupForm.get('lastName')?.removeValidators(Validators.required);
+      }
+    }
   }
 
   onAccountCreation() {
-    this.authService.addUser(this.signupForm.value).pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
+    let requesData = this.updateFlag ? { ...this.signupForm.value, updateFlag: true } : this.signupForm.value;
+    let message = this.updateFlag ? 'Updated Successfully' : 'Account Created';
+    this.authService.addUser(requesData, message).pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
       this.router.navigate(['/auth/login'], { state: data })
     });
   }

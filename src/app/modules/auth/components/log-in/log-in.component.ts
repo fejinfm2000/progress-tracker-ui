@@ -38,6 +38,10 @@ export class LogInComponent implements OnDestroy {
     })
   }
 
+  navigation() {
+    this.router.navigate(['auth/signup'], { state: { ...this.loginForm.value, updateFlag: true } });
+  }
+
   ngOnDestroy(): void {
     this.unSubscribe$.next(null);
     this.unSubscribe$.complete();

@@ -13,8 +13,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  addUser(user: IUser): Observable<IUser> {
-    return this.http.patch<IUser>(this.apiUrl + `/addUser`, user);
+  addUser(user: IUser, message: string): Observable<IUser> {
+    return this.http.patch<IUser>(this.apiUrl + `/addUser`, user, { headers: { 'success-snack-bar': 'true', message } });
   }
 
   isUserPersent(user: IUser) {

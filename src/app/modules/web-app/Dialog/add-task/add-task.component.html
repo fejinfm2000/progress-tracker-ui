@@ -14,7 +14,7 @@
                     <mat-label>Category Name</mat-label>
                     <mat-select formControlName="categoryName">
                         <mat-option *ngFor="let category of categoryDropdown"
-                            value="category.key">{{category.value}}</mat-option>
+                            [value]="category.key">{{category.value}}</mat-option>
                     </mat-select>
                     <mat-error *ngIf="addTaskForm.controls['categoryName'].hasError('required')">
                         Category Name is required
@@ -115,7 +115,7 @@
                 <button mat-stroked-button (click)="addTextInput()">
                     <p class="header-button">Add Sub Task</p>
                 </button>
-                <button mat-stroked-button (click)="onSave()">
+                <button mat-stroked-button (click)="onSave()" [disabled]="!addTaskForm.valid">
                     <p class="header-button">Save</p>
                 </button>
             </div>

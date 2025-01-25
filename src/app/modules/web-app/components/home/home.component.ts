@@ -23,6 +23,7 @@ Chart.register(...registerables);
 })
 export class HomeComponent implements OnInit, AfterViewInit {
   name: string = 'Buddy';
+  email!: string;
   newTask: string = '';
   tasks: string[] = [];
   radius = 16;
@@ -56,11 +57,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   items: IProjectOverView[] = [
-    // { title: 'Title1', subTitle: 'Sub Title1', circumference: 40, progress: 40, strokeDashoffset: 40, tasks: [{ taskId: 1, taskName: 'Task Name 1' }] },
-    // { title: 'Title2', subTitle: 'Sub Title2', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 2, taskName: 'Task Name 2' }] },
-    // { title: 'Title3', subTitle: 'Sub Title3', circumference: 50, progress: 50, strokeDashoffset: 50, tasks: [{ taskId: 3, taskName: 'Task Name 3' }] },
-    // { title: 'Title4', subTitle: 'Sub Title4', circumference: 80, progress: 80, strokeDashoffset: 80, tasks: [{ taskId: 4, taskName: 'Task Name 4' }] },
-    // { title: 'Title5', subTitle: 'Sub Title5', circumference: 95, progress: 95, strokeDashoffset: 95, tasks: [{ taskId: 5, taskName: 'Task Name 5' }] },
+    // { title: 'Task 1',description:'create your task', subTitle: 'Sub Task 1', circumference: 0, progress: 0, strokeDashoffset: 0, tasks: [{ taskName: 'Create Task 1' }] },
+    // { title: 'Task 2',description:'create your task', subTitle: 'Sub Task 2', circumference: 0, progress: 0, strokeDashoffset: 0, tasks: [{  taskName: 'Create Task 1' }] },
   ];
 
   avatars: IAvatharTask[] = [
@@ -86,6 +84,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     if (sessionData) {
       userData = sessionData;
       this.name = userData.firstName;
+      this.email = userData.email;
       this.getUserTaskDetails(userData.email);
     }
     this.generateRandomNumber();
@@ -108,11 +107,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
           strokeDashoffset: (1 - 60 / 100) * (2 * Math.PI * 16)
         }
       })
+      this.setNewTask();
       this.updateVisibleItems();
 
     });
 
   }
+
+  setNewTask() {
+    if (this.items.length == 0) {
+      this.items = [
+        { title: 'Task 1', description: 'create your task', subTitle: 'Sub Task 1', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
+        { title: 'Task 2', description: 'create your task', subTitle: 'Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
+      ];
+    } else if (this.items.length == 1) {
+      this.items.push(
+        { title: 'Task 2', description: 'create your task', subTitle: 'Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] }
+      )
+    }
+  }
+
+
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
@@ -138,7 +153,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   openDialog(): void {
     const dialogRef = this.matDialog.open(AddTaskComponent, {
       disableClose: true,
-      data: {}
+      data: { email: this.email }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -159,10 +174,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   updateVisibleItems() {
     const nextIndex = (this.activeIndex + 1) % this.items.length;
-    this.visibleItems = [
-      this.items[this.activeIndex],
-      this.items[nextIndex],
-    ];
+    if (this.items[this.activeIndex])
+      this.visibleItems = [
+        this.items[this.activeIndex],
+        this.items[nextIndex],
+      ];
+    else {
+      this.visibleItems = []
+    }
   }
 
   generateRandomNumber(): void {

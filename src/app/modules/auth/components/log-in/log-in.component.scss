@@ -7,6 +7,12 @@
     margin: 0;
 }
 
+.forget-pass {
+    color: #7f74ef;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .feature-card {
     background-color: white;
 }
@@ -23,15 +29,22 @@ mat-form-field {
 
 .account-tit {
     color: #7f74ef;
-    margin: 1rem;
+    margin: 0rem;
 }
 
 h1 {
     margin: 0rem;
 }
 
+.login-tit-con {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .login-p {
-    margin: 0rem 0rem 2rem 2rem;
+    margin: 0rem 0rem 2rem 0rem;
     font-size: small;
 }
 

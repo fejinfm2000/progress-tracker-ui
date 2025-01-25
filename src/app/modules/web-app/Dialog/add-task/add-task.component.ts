@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeService } from '../../services/home.service';
-import { IKeyValuePair } from '../../models/home';
+import { IActivityDetails, IKeyValuePair } from '../../models/home';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-add-task',
@@ -20,14 +21,14 @@ export class AddTaskComponent implements OnInit {
     return this.addTaskForm?.get('subActivities') as FormArray;
   }
 
-  constructor(private dialogRef: MatDialogRef<AddTaskComponent>, private fb: FormBuilder, private homeService: HomeService) {
+  constructor(private dialogRef: MatDialogRef<AddTaskComponent>, @Inject(MAT_DIALOG_DATA) public data: { email: string }, private fb: FormBuilder, private homeService: HomeService) {
     this.addTaskForm = this.fb.group({
       categoryName: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      email: [data?.email, [Validators.required, Validators.email]],
       activityName: [null, Validators.required],
       description: [null, Validators.required],
       subActivities: this.fb.array([
-        this.fb.control('', Validators.required)
+        this.fb.control(null, Validators.required)
       ]),
       startDate: [{ value: new Date(), disabled: true }, Validators.required],
       endDate: [null, Validators.required],
@@ -52,7 +53,7 @@ export class AddTaskComponent implements OnInit {
   };
 
   addTextInput(): void {
-    this.subActivitiesFormArray.push(this.fb.control('')); // Add a new text input
+    this.subActivitiesFormArray.push(this.fb.control(null)); // Add a new text input
   }
 
   removeTextInput(index: number): void {
@@ -60,7 +61,19 @@ export class AddTaskComponent implements OnInit {
   }
 
   onSave() {
-    console.log(this.addTaskForm);
+    const formatDate = (date: Date): string => {
+      return new Intl.DateTimeFormat('en-GB').format(date).replace(/\//g, '-');;
+    };
+    let data = {
+      ...this.addTaskForm.getRawValue(),
+      endDate: formatDate(this.addTaskForm.getRawValue().endDate),
+      startDate: formatDate(new Date()),
+      subActivities: (this.addTaskForm.getRawValue().subActivities as []).filter(data => data)
+    } as IActivityDetails
+    this.homeService.addActivities(data).subscribe(data => {
+      this.dialogRef.close();
+    })
+
   }
 
   closeDialog(): void {

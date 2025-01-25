@@ -23,6 +23,7 @@ mat-form-field {
 
 .account-tit {
     color: #7f74ef;
+    margin: 0rem;
 }
 
 h1 {
@@ -72,6 +73,16 @@ h1 {
     width: 30rem;
     margin: 0.5rem;
     border-radius: 0.8rem;
+}
+
+.link {
+    color: #7f74ef;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.pass-title {
+    margin: 2rem;
 }
 
 

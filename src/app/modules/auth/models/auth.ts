@@ -6,4 +6,5 @@ export interface IUser {
     passwordHash: string;
     createdAt: Date;
     lastLogin: Date;
+    updateFlag: boolean;
 }
