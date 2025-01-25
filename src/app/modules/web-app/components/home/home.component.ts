@@ -52,8 +52,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   overview: IOverview[] = [
-    { count: 64, title: 'Total Project' }, { count: 14, title: 'Ongoing Project' }, { count: 4, title: 'In Progress' },
-    { count: 64, title: 'Completed Project' }, { count: 10, title: 'Upcomming Project' }, { count: 8, title: 'Demo Project' }
+    // { count: 64, title: "Total Task's" }, { count: 4, title: "Task's In Progress" },
+    // { count: 64, title: "Completed Task's" }
   ];
 
   items: IProjectOverView[] = [
@@ -69,10 +69,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   notifications = [
-    'You have a new message from John.',
-    'Reminder: Meeting at 3 PM today.',
-    'Your package has been delivered.',
-    'New comment on your post.',
+    "You'r task is in Progress.",
+    'Reminder: Todays taks is pending.',
+    "You have completed today's task.",
+    'Create your own Task to to better.',
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private matDialog: MatDialog, private sessionStorageService: SessionStorageService,
@@ -92,28 +92,38 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   getUserTaskDetails(email: string) {
     this.homeService.getAllUserTaskDetails(email).subscribe(data => {
-      console.log(data);
       this.userActivities = data;
-      this.items = this.userActivities.activity.map(activity => {
-        return {
-          title: activity.category.categoryName,
-          subTitle: activity.activityName,
-          description: activity.description,
-          tasks: this.generateInitialsForAvatars(this.userActivities.subActivity.map(subActivity => {
-            return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
-          })),
-          circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
-          progress: 60,
-          strokeDashoffset: (1 - 60 / 100) * (2 * Math.PI * 16)
-        }
-      })
+      this.items = this.transformTaskData(this.userActivities);
       this.setNewTask();
+      this.setDetails();
       this.updateVisibleItems();
-
     });
 
   }
 
+  transformTaskData(activiesData: IUserActivities) {
+    return activiesData?.activity.map(activity => {
+      return {
+        title: activity.category.categoryName,
+        subTitle: activity.activityName,
+        description: activity.description,
+        tasks: this.generateInitialsForAvatars(this.userActivities.subActivity.map(subActivity => {
+          return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
+        })),
+        circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
+        progress: 60,
+        strokeDashoffset: (1 - 60 / 100) * (2 * Math.PI * 16)
+      }
+    })
+  }
+
+  setDetails() {
+    this.overview = [
+      { count: this.userActivities.activity?.filter(data => data.status == "Started")?.length || 0, title: "Total Task's" },
+      { count: this.userActivities.activity?.filter(data => data.status == "In-Progress")?.length || 0, title: "Task's In Progress" },
+      { count: this.userActivities.activity?.filter(data => data.status == "Completed")?.length || 0, title: "Completed Task's" }
+    ]
+  }
   setNewTask() {
     if (this.items.length == 0) {
       this.items = [
@@ -157,7 +167,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      if (result == 'Y') {
+        this.getUserTaskDetails(this.email);
+      }
     });
   }
 

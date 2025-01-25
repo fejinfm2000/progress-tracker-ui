@@ -71,12 +71,12 @@ export class AddTaskComponent implements OnInit {
       subActivities: (this.addTaskForm.getRawValue().subActivities as []).filter(data => data)
     } as IActivityDetails
     this.homeService.addActivities(data).subscribe(data => {
-      this.dialogRef.close();
+      this.dialogRef.close('Y');
     })
 
   }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close('N');
   }
 }
