@@ -106,10 +106,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     return activiesData?.activity.map(activity => {
       return {
         title: activity.category.categoryName,
+        activityId: activity.activityId,
         subTitle: activity.activityName,
         description: activity.description,
         repitation: this.userActivities?.subActivity?.length || 0,
         tasks: this.taskIteration(this.userActivities).slice(0, 3),
+        tasksCount: this.taskIteration(this.userActivities)?.length || 0,
         circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
         progress: activity.progress,
         strokeDashoffset: (1 - activity.progress || 0 / 100) * (2 * Math.PI * 16)
@@ -134,12 +136,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   setNewTask() {
     if (this.items.length == 0) {
       this.items = [
-        { title: 'Create Task 1', description: 'create your task', subTitle: 'Create Sub Task 1', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
-        { title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] },
+        { activityId: 1, title: 'Create Task 1', description: 'create your task', subTitle: 'Create Sub Task 1', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [], tasksCount: 0 },
+        { activityId: 2, title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [], tasksCount: 0 },
       ];
     } else if (this.items.length == 1) {
       this.items.push(
-        { title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [] }
+        { activityId: 3, title: 'Create Task 2', description: 'create your task', subTitle: 'Create Sub Task 2', circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), progress: 0, strokeDashoffset: (1 - 0 / 100) * (2 * Math.PI * 16), tasks: [], tasksCount: 0 }
       )
     }
     this.isCarouselButton = this.items.length > 2;

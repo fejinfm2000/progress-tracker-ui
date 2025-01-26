@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AddTaskComponent } from './Dialog/add-task/add-task.component';
 import { NewsComponent } from './components/news/news.component';
 import { TaskManagementComponent } from './components/task-management/task-management.component';
+import { CurrentTaskComponent } from './components/current-task/current-task.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'task-management',
         component: TaskManagementComponent
+      },
+      {
+        path: 'task/:id',
+        component: CurrentTaskComponent
       },
       {
         path: 'news',
@@ -42,7 +47,8 @@ const routes: Routes = [
     HomeComponent,
     AddTaskComponent,
     NewsComponent,
-    TaskManagementComponent
+    TaskManagementComponent,
+    CurrentTaskComponent
   ],
   imports: [
     RouterModule.forChild(routes),

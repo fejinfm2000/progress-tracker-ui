@@ -1,5 +1,53 @@
 <div class="container">
+    <div *ngIf="alltasks?.length==0" class="carousel-content">
+        No Task Available..
+    </div>
+    <div class="carousel-content">
+        <div class="carousel-item" *ngFor="let item of alltasks">
+            <div class="carousel-item-container">
+                <div>
+                    <h4>{{item.title}}</h4>
+                    <p class="item-des">{{item.description}}</p>
+                </div>
+                <div class="carousel-item-content">
+                    <div class="carousel-item-con">
+                        <div class="carousel-item-content-sec">
+                            <h4 class="carousel-item-subTitle">{{item.subTitle}}</h4>
+                            <div class="avatar-group">
+                                <!-- Loop through avatars -->
+                                <div class="avatar" *ngFor="let avatar of item.tasks; let i = index"
+                                    [style.zIndex]="item.tasks.length - i ? '':''"
+                                    [style.marginLeft]="i !== 0 ? '-15px' : '0'">
+                                    <ng-container *ngIf="avatar.taskName">
+                                        <span class="avatar-initials">{{ avatar.taskInitials }}</span>
+                                    </ng-container>
+                                </div>
 
-    <p>task-management works!</p>
+                                <div class="avatar add-avatar" (click)="onSelectTask(item)">
+                                    <i class="fas fa-folder"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- progress-circle -->
+                        <div class="progress-circle-container">
+                            <svg class="progress-circle" viewBox="0 0 36 36">
+                                <!-- Background Circle -->
+                                <circle class="progress-bg" cx="18" cy="18" r="16"></circle>
+                                <!-- Progress Circle -->
+                                <circle class="progress" cx="18" cy="18" r="16"
+                                    [attr.stroke-dasharray]="item.circumference"
+                                    [attr.stroke-dashoffset]="item.strokeDashoffset"></circle>
+                            </svg>
+                            <div class="progress-text">{{ item.progress }}% <p class="progress-p">{{
+                                    item.tasksCount}}Task</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>

@@ -1,3 +1,239 @@
+.team-member-card {
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    transition: all 0.3s ease-in-out; // Smooth transition
+
+    &:hover {
+        color: #7f74ef;
+        transform: scale(1.05); // Slight zoom effect on hover
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Shadow effect
+        cursor: pointer;
+    }
+}
+
+
+.carousel-header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.carousel-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+}
+
+.button-group {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.carousel-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: right;
+    gap: 1rem;
+}
+
+.carousel-content-sec {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0rem 2rem 0rem 2rem;
+}
+
+/* Buttons */
+.carousel-button {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #7f74ef, #7f74ef);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.carousel-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.carousel-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.carousel-item-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.carousel-item {
+    width: 45%;
+    padding: 1rem;
+    background-color: #e0e8ef;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.carousel-item-content {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1rem;
+}
+
+.carousel-item-content-sec {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+}
+
+.progress-circle-container {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    font-family: Arial, sans-serif;
+    margin-top: 1rem;
+}
+
+.progress-circle {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
+
+.progress-bg,
+.progress {
+    fill: none;
+    stroke-width: 2;
+}
+
+.progress-bg {
+    stroke: white;
+    transition: stroke-dashoffset 0.35s;
+    transform-origin: center;
+    border: #333;
+}
+
+.progress {
+    stroke: #7f74ef;
+    border: #333;
+    stroke-linecap: round;
+}
+
+.item-des {
+    margin: 0rem;
+    font-size: smaller;
+    color: gray;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.carousel-item-subTitle {
+    margin-bottom: 1rem;
+}
+
+.carousel-item-con {
+    display: flex;
+    align-items: center;
+}
+
+.progress-p {
+    font-size: x-small;
+    margin-top: 0.1rem;
+}
+
+.profile-image {
+    width: 8rem;
+}
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Base Avatar Styles */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #7f74ef;
+    color: #fff;
+    overflow: hidden;
+    border: 2px solid #fff;
+    transition: transform 0.2s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Overlapping Margins */
+.avatar+.avatar {
+    margin-left: -15px;
+}
+
+/* Avatar Image */
+.avatar-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Add Avatar */
+.add-avatar {
+    background-color: white;
+    color: #7f74ef;
+    font-size: 24px;
+    border: 2px dashed #7f74ef;
+}
+
+.add-avatar:hover {
+    background-color: white;
+    transform: scale(1.1);
+    color: #333;
+}
+
+
+
 @media (min-width: 768px) {
     .container {
         margin-left: 2rem;

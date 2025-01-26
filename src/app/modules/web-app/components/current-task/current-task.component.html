@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="back-container">
+        <div>
+            <span class="back-button-sec" (click)="goBack()">
+                <i class="fas fa-arrow-left"></i> Back
+            </span>
+        </div>
+        <div>
+        </div>
+    </div>
+
+    <div class="overview-section-container">
+        <mat-card *ngFor="let item of allTask" class="team-member-card">
+            <mat-card-header>
+                <mat-card-title>{{ item.title }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <p class="overview-section-subtitle">{{ item.desctiption }}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

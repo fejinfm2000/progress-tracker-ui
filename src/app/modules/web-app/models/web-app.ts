@@ -8,6 +8,7 @@ export interface IAvatharTask {
     taskInitials?: string;
 }
 export interface IProjectOverView {
+    activityId: number,
     title: string,
     description: string,
     subTitle: string,
@@ -15,7 +16,8 @@ export interface IProjectOverView {
     strokeDashoffset: number,
     progress: number,
     repitation?: number,
-    tasks: IAvatharTask[]
+    tasks: IAvatharTask[],
+    tasksCount: number
 
 }
 

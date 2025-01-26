@@ -1,0 +1,47 @@
+.back-button-sec {
+    cursor: pointer;
+}
+
+.overview-section-container {
+    width: 95%;
+    margin: 1rem;
+}
+
+.team-member-card {
+    margin: 1rem;
+    transition: all 0.3s ease-in-out; // Smooth transition
+
+    &:hover {
+        color: #7f74ef;
+        transform: scale(1.05); // Slight zoom effect on hover
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); // Shadow effect
+        cursor: pointer;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .container {
+        margin-left: 2rem;
+    }
+
+    .back-container {
+        margin: 1rem;
+        display: flex;
+        flex-direction: row;
+        color: #7f74ef;
+    }
+}
+
+@media (max-width: 769px) {
+    .container {
+        margin-top: 4rem;
+    }
+
+    .back-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 50%;
+    }
+}
