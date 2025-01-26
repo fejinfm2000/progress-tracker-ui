@@ -25,7 +25,8 @@ const routes: Routes = [
       },
       {
         path: 'task/:id',
-        component: CurrentTaskComponent
+        component: CurrentTaskComponent,
+        data: { prerender: false }
       },
       {
         path: 'news',
