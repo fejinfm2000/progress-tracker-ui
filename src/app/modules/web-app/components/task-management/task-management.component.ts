@@ -31,13 +31,7 @@ export class TaskManagementComponent implements OnInit {
   getUserTaskDetails(email: string) {
     this.homeService.getAllUserTaskDetails(email).subscribe(data => {
       this.userActivities = data;
-      this.alltasks = [...this.transformTaskData(data),
-      ...this.transformTaskData(data),
-      ...this.transformTaskData(data),
-      ...this.transformTaskData(data),
-      ...this.transformTaskData(data),
-      ...this.transformTaskData(data),
-      ];
+      this.alltasks = [...this.transformTaskData(data)];
     });
 
   }
