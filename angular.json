@@ -21,6 +21,17 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
+        "prerender": {
+          "builder": "@angular/platform-server:prerender",
+          "options": {
+            "routes": [
+              "/",
+              "/webApp/home",
+              "/webApp/task/1",
+              "/webApp/news"
+            ]
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
