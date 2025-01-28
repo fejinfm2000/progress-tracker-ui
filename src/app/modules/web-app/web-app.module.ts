@@ -9,6 +9,8 @@ import { AddTaskComponent } from './Dialog/add-task/add-task.component';
 import { NewsComponent } from './components/news/news.component';
 import { TaskManagementComponent } from './components/task-management/task-management.component';
 import { CurrentTaskComponent } from './components/current-task/current-task.component';
+import { ScheduleComponent } from './components/schedule/schedule.component';
+import { CalenderComponent } from '../../shared/components/calender/calender.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,10 @@ const routes: Routes = [
         component: NewsComponent
       },
       {
+        path: 'schedule',
+        component: ScheduleComponent
+      },
+      {
         path: '',
         redirectTo: '/webApp/home',
         pathMatch: 'full'
@@ -49,7 +55,9 @@ const routes: Routes = [
     AddTaskComponent,
     NewsComponent,
     TaskManagementComponent,
-    CurrentTaskComponent
+    CurrentTaskComponent,
+    ScheduleComponent,
+    CalenderComponent
   ],
   imports: [
     RouterModule.forChild(routes),

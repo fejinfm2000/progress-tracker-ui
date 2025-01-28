@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NewsService } from '../../services/news.service';
 import { DatePipe } from '@angular/common';
+import { INews, INewsData } from '../../models/news';
 
 @Component({
   selector: 'app-news',
@@ -10,13 +11,13 @@ import { DatePipe } from '@angular/common';
   styleUrl: './news.component.scss'
 })
 export class NewsComponent {
-  news: any[] = [];
+  news: INewsData[] = [];
 
   constructor(private newsService: NewsService) { }
 
   ngOnInit(): void {
     this.newsService.getNews().subscribe(data => {
-      this.news = data;
+      this.news = data.data as INewsData[];
     })
   }
 }

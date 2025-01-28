@@ -12,19 +12,30 @@
 }
 
 .news-item a {
-  color: #007bff;
+  color: #7f74ef;
   text-decoration: none;
+}
+
+.title {
+  color: #7f74ef;
 }
 
 .news-item a:hover {
   text-decoration: underline;
 }
 
-
+.news-image {
+  width: 30%;
+}
 
 @media (min-width: 768px) {
   .welcome-message {
     font-size: 1.5em;
+  }
+
+  .news-item {
+    margin: 1.8rem;
+
   }
 
   .container {
@@ -41,5 +52,6 @@
 
   .news-item {
     margin: 1rem;
+
   }
 }

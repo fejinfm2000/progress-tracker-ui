@@ -244,4 +244,13 @@
     .container {
         margin-top: 4rem;
     }
+
+    .carousel-item {
+        width: 80%;
+        padding: 1rem;
+        background-color: #e0e8ef;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+    }
 }

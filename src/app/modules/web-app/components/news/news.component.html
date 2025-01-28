@@ -1,7 +1,8 @@
 <div class="container">
     <div *ngFor="let article of news" class="news-item">
-        <h2>{{ article.title }}</h2>
+        <h2 class="title">{{ article.title }}</h2>
         <p><strong>Author:</strong> {{ article.author }}</p>
+        <img src="{{article.image}}" class="news-image" alt="{{article.author}}">
         <p><strong>Published At:</strong> {{ article.published_at }}</p>
         <p><strong>Description:</strong> {{ article.description }}</p>
         <p><strong>Source:</strong> {{ article.source }}</p>

@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { INews } from '../models/news';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
-  private newsUrl1 = 'https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?access_key=6f2984d27b6577e16fe4bbd5a2acc3c0';
-  private newsUrl = `http://api.mediastack.com/v1/news?access_key=6f2984d27b6577e16fe4bbd5a2acc3c0`;
+  url = 'https://progress-tracker-api-3ca5.onrender.com/api/tracker';
   private newsData = [
     {
       author: 'Newsbytes.PH',
@@ -25,8 +25,7 @@ export class NewsService {
   ];
   constructor(private http: HttpClient) { }
 
-  getNews(): Observable<any> {
-    // return this.http.get(this.newsUrl);
-    return of(this.newsData);
+  getNews(): Observable<INews> {
+    return this.http.get<INews>(`${this.url}/getTodayNews`);
   }
 }
