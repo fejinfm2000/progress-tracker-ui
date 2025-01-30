@@ -11,6 +11,7 @@ import { TaskManagementComponent } from './components/task-management/task-manag
 import { CurrentTaskComponent } from './components/current-task/current-task.component';
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { CalenderComponent } from '../../shared/components/calender/calender.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
         component: ScheduleComponent
       },
       {
+        path: 'profile',
+        component: ProfileComponent
+      },
+      {
         path: '',
         redirectTo: '/webApp/home',
         pathMatch: 'full'
@@ -57,7 +62,8 @@ const routes: Routes = [
     TaskManagementComponent,
     CurrentTaskComponent,
     ScheduleComponent,
-    CalenderComponent
+    CalenderComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forChild(routes),
