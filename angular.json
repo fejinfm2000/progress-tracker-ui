@@ -49,7 +49,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/global-styles/theme.scss"
+              "src/global-styles/theme.scss",
+              "node_modules/quill/dist/quill.snow.css",
+              "node_modules/quill/dist/quill.bubble.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",

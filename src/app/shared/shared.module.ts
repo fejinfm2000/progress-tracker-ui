@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import {MatTabsModule} from '@angular/material/tabs';
+import { RichTextEditorComponent } from './components/rich-text-editor/rich-text-editor.component';
 
 @NgModule({
   declarations: [],
@@ -39,7 +40,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    MatTabsModule
+    MatTabsModule,
   ],
   exports: [
     MatButtonModule,
@@ -60,8 +61,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatSelectModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    MatTabsModule
-
+    MatTabsModule,
   ]
 })
 export class SharedModule { }

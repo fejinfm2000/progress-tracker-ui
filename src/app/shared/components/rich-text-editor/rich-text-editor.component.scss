@@ -1,0 +1,65 @@
+/* Style for the Material Card */
+mat-card {
+    border-radius: 0rem;
+    box-shadow: none;
+    background: none;
+}
+
+/* Quill Editor Styling */
+quill-editor {
+    display: block;
+}
+
+/* Ensure the editor content area is properly styled */
+.ql-container {
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    min-height: 10rem !important;
+    font-size: 16px;
+    background-color: white;
+}
+
+/* Toolbar Styling */
+.ql-toolbar {
+    background-color: #f8f9fa;
+    border: 1px solid #ccc !important;
+    border-radius: 5px 5px 0 0;
+}
+
+/* Fix content padding and spacing */
+.ql-editor {
+    padding: 12px;
+    min-height: 150px;
+    border-radius: 0 0 5px 5px;
+    min-height: 10rem !important;
+}
+
+/* Preview Box Styling */
+mat-card-content div[innerHTML] {
+    min-height: 10rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+}
+
+.icon-con {
+    color: #7f74ef;
+    cursor: pointer;
+}
+
+.action-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    mat-card {
+        max-width: 100%;
+        padding: 10px;
+    }
+}

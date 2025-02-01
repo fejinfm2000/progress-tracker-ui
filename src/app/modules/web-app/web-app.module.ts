@@ -12,6 +12,8 @@ import { CurrentTaskComponent } from './components/current-task/current-task.com
 import { ScheduleComponent } from './components/schedule/schedule.component';
 import { CalenderComponent } from '../../shared/components/calender/calender.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RichTextEditorComponent } from '../../shared/components/rich-text-editor/rich-text-editor.component';
+import { QuillModule } from 'ngx-quill';
 
 const routes: Routes = [
   {
@@ -63,12 +65,15 @@ const routes: Routes = [
     CurrentTaskComponent,
     ScheduleComponent,
     CalenderComponent,
-    ProfileComponent
+    ProfileComponent,
+    RichTextEditorComponent
   ],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
-    SharedModule
+    SharedModule,
+    QuillModule.forRoot(),
+
   ]
 })
 export class WebAppModule { }

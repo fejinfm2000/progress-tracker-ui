@@ -26,7 +26,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    SharedModule
+    SharedModule,
   ],
   providers: [
     provideNativeDateAdapter(),
