@@ -193,6 +193,10 @@ p {
         justify-content: flex-start;
         flex-wrap: wrap;
     }
-
+    .content-title-sec {
+        display: flex;
+        flex-direction: row;
+        width: 85%;
+    }
 
 }
