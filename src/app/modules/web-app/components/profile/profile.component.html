@@ -9,7 +9,9 @@
         </div>
         <div class="profile-content-sec">
             <!-- heading -->
-            <p class="content-title">Fejin FM</p>
+            <div class="content-title-sec">
+                <p class="content-title">Fejin FM</p>
+            </div>
             <!-- icon -->
             <div class="icon-con">
                 <span class="icon-sec"><a href="https://www.google.co.in/" target="_blank">
@@ -43,9 +45,37 @@
                 <div>
                     <p class="role-title">Experience</p>
                     <p class="role-sub-title">3 Years</p>
-
+                </div>
+            </div>
+            <!-- SuperPower -->
+            <div class="super-power">
+                <div class="power-title">
+                    <p>SuperPower Skills</p>
+                </div>
+                <div class="power-skills">
+                    <div *ngFor="let skill of superPowerSkills" class="profile-super-content">
+                        <span><i class="fas fa-star"></i>
+                            {{skill}}</span>
+                    </div>
                 </div>
             </div>
         </div>
+
+    </div>
+    <div class="profile-tab-container">
+        <mat-tab-group>
+            <mat-tab label="My Story">
+
+            </mat-tab>
+            <mat-tab label="Skills">
+
+            </mat-tab>
+            <mat-tab label="Projects">
+
+            </mat-tab>
+            <mat-tab label="Experience">
+
+            </mat-tab>
+        </mat-tab-group>
     </div>
 </div>
