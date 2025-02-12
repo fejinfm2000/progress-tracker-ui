@@ -52,6 +52,9 @@ export class RichTextEditorComponent implements OnInit {
 
     // Add the custom handler to the image button in the toolbar
     this.quillInstance.getModule('toolbar').addHandler('image', imageHandler);
+    this.quillInstance.on('text-change', () => {
+      this.content = this.quillInstance.root.innerHTML;
+    });
   }
   ngOnInit(): void {
   }

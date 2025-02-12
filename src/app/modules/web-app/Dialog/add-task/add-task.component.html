@@ -104,16 +104,23 @@
 
             <div *ngIf="subActivitiesFormArray" formArrayName="subActivities">
                 <div class="add-task-template-array"
-                    *ngFor="let textInput of subActivitiesFormArray.controls; let i = index">
+                    *ngFor="let subActivityGroup of subActivitiesFormArray.controls; let i = index" [formGroupName]="i">
+                    <!-- ✅ Bind FormGroupName here -->
+
                     <mat-form-field class="example-textbox" appearance="outline">
                         <mat-label>Sub Task {{ i + 1 }}</mat-label>
-                        <input matInput [formControlName]="i" placeholder="Enter task name">
-                        <!-- Icon inside the text box -->
-                        <button [ngClass]="{'delete-disable':i==0}" mat-icon-button matSuffix color="warn"
-                            (click)="removeTextInput(i)">
-                            <mat-icon>delete</mat-icon>
-                        </button>
+                        <input matInput formControlName="subActivityName" placeholder="Enter Sub Task Name">
+
                     </mat-form-field>
+                    <mat-form-field class="example-textbox" appearance="outline">
+                        <mat-label>Description {{ i + 1 }}</mat-label>
+                        <input matInput formControlName="description" placeholder="Description">
+                    </mat-form-field>
+                    <!-- Delete Button -->
+                    <button [ngClass]="{'delete-disable': i === 0}" mat-icon-button matSuffix color="warn"
+                        (click)="removeTextInput(i)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
                 </div>
             </div>
 

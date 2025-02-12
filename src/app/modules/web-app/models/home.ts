@@ -1,11 +1,11 @@
 export interface ISubActivity {
-    subActivityId: number;
+    subActivityId?: number;
     subActivityName: string;
-    description: string;
-    startDate: string;
-    endDate: string;
-    progress: number;
-    status: string;
+    description?: string;
+    startDate?: string;
+    endDate?: string;
+    progress?: number;
+    status?: string;
     activity?: IActivity;
 
 }
@@ -42,7 +42,7 @@ export interface IActivityDetails {
     email?: string;
     activityName?: string;
     description?: string;
-    subActivities?: string[];
+    subActivities?: ISubActivity[];
     startDate?: string;
     endDate?: string;
     status?: string;

@@ -19,7 +19,14 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [webComponent, WebHeaderComponent, WebHomeComponent, WebAboutComponent, WebContactComponent, WebFooterComponent, WebFeaturesComponent, WebTeamComponent],
+  declarations: [webComponent,
+    WebHeaderComponent,
+    WebHomeComponent,
+    WebAboutComponent,
+    WebContactComponent,
+    WebFooterComponent,
+    WebFeaturesComponent,
+    WebTeamComponent],
   imports: [
     RouterModule.forChild(routes),
     SharedModule,

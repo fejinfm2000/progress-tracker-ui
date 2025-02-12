@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeService } from '../../services/home.service';
-import { IActivityDetails, IKeyValuePair, IUserActivities } from '../../models/home';
+import { IActivityDetails, IKeyValuePair, ISubActivity, IUserActivities } from '../../models/home';
 import { formatDate } from '@angular/common';
 import { IProjectOverView } from '../../models/web-app';
 
@@ -31,26 +31,51 @@ export class AddTaskComponent implements OnInit {
       email: [data?.email, [Validators.required, Validators.email]],
       activityName: [data.currentActivity?.subTitle, Validators.required],
       description: [null, Validators.required],
-      subActivities: this.fb.array([
-        this.fb.control(null, Validators.required)
-      ]),
+      subActivities: this.generateSubActivitiesArray(),
       startDate: [{ value: new Date(), disabled: true }, Validators.required],
       endDate: [null, Validators.required],
       status: [{ value: 'Started', disabled: true }, Validators.required],
       progress: [{ value: 0, disabled: true }, Validators.required],
     });
 
-    let currentSubActivity = this.allActivityDetails?.subActivity.filter(subActivity => subActivity?.activity?.activityName === data?.currentActivity?.subTitle).map(subActivity => subActivity?.subActivityName);
-    let subActivities = this.fb.array([])
-    subActivities.push(this.fb.control(null, Validators.required));
+    let currentSubActivity = this.allActivityDetails?.subActivity.filter(subActivity => subActivity?.activity?.activityName === data?.currentActivity?.subTitle).map(subActivity => { return { subActivityId: subActivity.subActivityId, subActivityName: subActivity?.subActivityName, description: subActivity.description } });
+    let subActivities = this.generateSubActivitiesArray();
 
     if (currentSubActivity?.length > 0) {
       subActivities.clear();
       currentSubActivity.forEach((data, index) => {
-        subActivities.push(this.fb.control(data, index == 0 ? Validators.required : null));
+        subActivities.push(
+          this.fb.group({
+            subActivityId: this.fb.control(data.subActivityId || null),
+            subActivityName: this.fb.control(data.subActivityName, index == 0 ? Validators.required : null),
+            description: this.fb.control(data.description || null),
+            startDate: this.fb.control(null),
+            endDate: this.fb.control(null),
+            progress: this.fb.control(null),
+            status: this.fb.control("Started"),
+          })
+        );
       })
       this.addTaskForm.controls['subActivities'] = subActivities as FormArray;
     }
+  }
+
+
+  generateSubActivitiesGroup() {
+    return this.fb.group({
+      subActivityId: this.fb.control<number | null>(null),
+      subActivityName: this.fb.control<string | null>(null, Validators.required),
+      description: this.fb.control<string | null>(null),
+      startDate: this.fb.control(null),
+      endDate: this.fb.control(null),
+      progress: this.fb.control(null),
+      status: this.fb.control("Started"),
+    })
+  }
+  generateSubActivitiesArray() {
+    return this.fb.array([
+      this.generateSubActivitiesGroup()
+    ])
   }
 
 
@@ -88,7 +113,7 @@ export class AddTaskComponent implements OnInit {
   };
 
   addTextInput(): void {
-    this.subActivitiesFormArray.push(this.fb.control(null)); // Add a new text input
+    this.subActivitiesFormArray.push(this.generateSubActivitiesGroup()); // Add a new text input
   }
 
   removeTextInput(index: number): void {

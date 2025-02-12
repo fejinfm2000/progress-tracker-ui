@@ -22,9 +22,9 @@
         </div>
     </div>
 
-    <button (click)="viewVisitors()" mat-stroked-button>
+    <!-- <button (click)="viewVisitors()" mat-stroked-button>
         <p class="header-button">{{!isViewable? "View Visitors":"Hide Visitors"}}</p>
-    </button>
+    </button> -->
     <div class="team-container" *ngIf="isViewable">
         <mat-card *ngFor="let visitor of filteredVisitors" class="team-member-card">
             <mat-card-header>

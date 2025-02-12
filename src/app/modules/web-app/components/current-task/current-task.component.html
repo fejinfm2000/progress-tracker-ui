@@ -17,6 +17,15 @@
             <mat-card-content>
                 <p class="overview-section-subtitle">{{ item.desctiption }}</p>
             </mat-card-content>
+            <mat-card-actions class="completed-action">
+                <div *ngIf="statusList.includes(item.status)" class="status-text">
+                    <p class="overview-section-subtitle">{{ item.status }} <i class="fas fa-check-square"></i>
+                    </p>
+                </div>
+                <button *ngIf="item.status!='Completed'" mat-button (click)="onUpdate(item.subActivityId)">
+                    <p class="completed-text">Mark As Completed <i class="far fa-thumbs-up"></i></p>
+                </button>
+            </mat-card-actions>
         </mat-card>
     </div>
 </div>
