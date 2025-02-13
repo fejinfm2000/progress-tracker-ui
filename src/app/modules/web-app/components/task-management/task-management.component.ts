@@ -38,6 +38,7 @@ export class TaskManagementComponent implements OnInit {
 
   transformTaskData(activiesData: IUserActivities) {
     return activiesData?.activity.map(activity => {
+      let progress = this.userActivities?.subActivity.map(data => data.progress).reduce((sum, currentValue) => (sum || 0) + (currentValue || 0)) || 0;
       return {
         title: activity.category.categoryName,
         activityId: activity.activityId,
@@ -46,10 +47,12 @@ export class TaskManagementComponent implements OnInit {
         repitation: this.userActivities?.subActivity?.length || 0,
         tasks: this.taskIteration(this.userActivities).slice(0, 3),
         tasksCount: this.taskIteration(this.userActivities)?.length || 0,
-        circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
-        progress: activity.progress,
-        strokeDashoffset: (1 - activity.progress || 0 / 100) * (2 * Math.PI * 16)
-      }
+        circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), // Approx. 100.48
+        progress: this.userActivities?.subActivity.length
+          ? (progress / this.userActivities.subActivity.length) * 100
+          : 0,
+        strokeDashoffset: (2 * Math.PI * 16) * (1 - ((progress / this.userActivities?.subActivity.length || 0) * 100) / 100),
+      };
     })
   }
 

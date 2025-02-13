@@ -40,8 +40,8 @@
                                     [attr.stroke-dasharray]="item.circumference"
                                     [attr.stroke-dashoffset]="item.strokeDashoffset"></circle>
                             </svg>
-                            <div class="progress-text">{{ item.progress }}% <p class="progress-p">{{
-                                    item.tasksCount}} Task</p>
+                            <div class="progress-text">{{ item.progress | number: '1.0' }}% <p class="progress-p">{{
+                                    item.tasksCount }} Task</p>
                             </div>
                         </div>
                     </div>

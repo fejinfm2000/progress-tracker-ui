@@ -11,6 +11,7 @@ import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 import { isPlatformBrowser } from '@angular/common';
 import { HomeService } from '../../services/home.service';
 import { IUserActivities } from '../../models/home';
+import { ActivatedRoute } from '@angular/router';
 
 Chart.register(...registerables);
 
@@ -40,6 +41,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   isCarouselButton: boolean = false;
   @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
   userActivities!: IUserActivities;
+  activityId!: number;
   chartHeaderData: { time: number, title: string }[] = [
     { time: 17, title: "Time Spent" },
     { time: 12, title: "Lesson Learn" },
@@ -77,7 +79,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ];
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object, private matDialog: MatDialog, private sessionStorageService: SessionStorageService,
-    private homeService: HomeService) { }
+    private homeService: HomeService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     let userData: IUser;
@@ -88,6 +90,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
       this.email = userData.email;
       this.getUserTaskDetails(userData.email);
     }
+    // this.activityId = parseInt(this.route.snapshot.paramMap.get('id')!)
+
     this.generateRandomNumber();
   }
 
@@ -104,6 +108,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   transformTaskData(activiesData: IUserActivities) {
     return activiesData?.activity.map(activity => {
+      let progress = this.userActivities?.subActivity.map(data => data.progress).reduce((sum, currentValue) => (sum || 0) + (currentValue || 0)) || 0;
       return {
         title: activity.category.categoryName,
         activityId: activity.activityId,
@@ -112,10 +117,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
         repitation: this.userActivities?.subActivity?.length || 0,
         tasks: this.taskIteration(this.userActivities).slice(0, 3),
         tasksCount: this.taskIteration(this.userActivities)?.length || 0,
-        circumference: parseFloat((2 * Math.PI * 16).toFixed(2)),
-        progress: activity.progress,
-        strokeDashoffset: (1 - activity.progress || 0 / 100) * (2 * Math.PI * 16)
-      }
+        circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), // Approx. 100.48
+        progress: this.userActivities?.subActivity.length
+          ? (progress / this.userActivities.subActivity.length) * 100
+          : 0,
+        strokeDashoffset: (2 * Math.PI * 16) * (1 - ((progress / this.userActivities?.subActivity.length || 0) * 100) / 100),
+      };
+
     })
   }
 
@@ -127,12 +135,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   setDetails() {
+    let completedCount = 0;
+    let inProgressCount = 0;
+    let totalCount = this.userActivities.activity.length || 0;
+    this.userActivities.activity.forEach(activity => {
+      console.log((this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId)));
+
+      completedCount = completedCount + (this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId).every(data => data.status === "Completed") ? 1 : 0);
+      inProgressCount = inProgressCount + (this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId).every(data => data.status === "In-Progress") ? 1 : 0)
+    })
     this.overview = [
-      { count: this.userActivities.activity?.filter(data => data.status == "Started")?.length || 0, title: "Total Task's" },
-      { count: this.userActivities.activity?.filter(data => data.status == "In-Progress")?.length || 0, title: "Task's In Progress" },
-      { count: this.userActivities.activity?.filter(data => data.status == "Completed")?.length || 0, title: "Completed Task's" }
+      { count: totalCount, title: "Total Task's" },
+      { count: inProgressCount, title: "Task's In Progress" },
+      { count: completedCount, title: "Completed Task's" }
     ]
   }
+
   setNewTask() {
     if (this.items.length == 0) {
       this.items = [

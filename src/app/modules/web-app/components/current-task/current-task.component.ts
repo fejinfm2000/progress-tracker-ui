@@ -20,7 +20,7 @@ export class CurrentTaskComponent implements OnInit {
   allTask: { status: string, subActivityId: number, title: string, desctiption: string }[] = [];
   activityId!: number;
   email!: string;
-  statusList: string[] = ["Completed", "Progress", "Started"]
+  statusList: string[] = ["Completed", "In-Progress", "Started"]
   goBack(): void {
     this.location.back();
   }
@@ -43,11 +43,11 @@ export class CurrentTaskComponent implements OnInit {
     })
   }
 
-  onUpdate(subActivityId: number) {
+  onUpdate(subActivityId: number, status: string) {
     let data = {
       subActivityId,
       email: this.email,
-      status: "Completed",
+      status: status,
       progress: 1
     }
     this.service.onUpdateSubActivity(this.activityId, data).subscribe(data => {
