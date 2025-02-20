@@ -1,10 +1,11 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeService } from '../../services/home.service';
 import { IActivityDetails, IKeyValuePair, ISubActivity, IUserActivities } from '../../models/home';
 import { formatDate } from '@angular/common';
 import { IProjectOverView } from '../../models/web-app';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-task',
@@ -13,12 +14,13 @@ import { IProjectOverView } from '../../models/web-app';
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent implements OnInit, OnDestroy {
   addTaskForm!: FormGroup;
   allActivityDetails!: IUserActivities;
   categoryDropdown: IKeyValuePair[] = []
   options: string[] = [];
   filteredOptions: string[] = [];
+  unSubscribe$ = new Subject();
 
   get subActivitiesFormArray(): FormArray {
     return this.addTaskForm?.get('subActivities') as FormArray;
@@ -80,7 +82,7 @@ export class AddTaskComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.homeService.getAllCatagories().subscribe(data => {
+    this.homeService.getAllCatagories().pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
       this.categoryDropdown = data.map(data => { return { key: data.categoryName, value: data.categoryName } })
     })
     this.onCatagorySelect();
@@ -96,7 +98,7 @@ export class AddTaskComponent implements OnInit {
 
   onCatagorySelect() {
     this.options = this.allActivityDetails.activity.map(data => data.activityName)
-    this.addTaskForm.get('categoryName')?.valueChanges.subscribe(categoryName => {
+    this.addTaskForm.get('categoryName')?.valueChanges.pipe(takeUntil(this.unSubscribe$)).subscribe(categoryName => {
       if (categoryName) {
         this.options = this.allActivityDetails.activity?.filter(data => data.category.categoryName === categoryName)?.map(data => data.activityName) || []
       }
@@ -131,7 +133,7 @@ export class AddTaskComponent implements OnInit {
       subActivities: (this.addTaskForm.getRawValue().subActivities as []).filter(data => data)
     } as IActivityDetails
 
-    this.homeService.addActivities(data).subscribe(data => {
+    this.homeService.addActivities(data).pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
       this.dialogRef.close('Y');
     })
 
@@ -139,5 +141,10 @@ export class AddTaskComponent implements OnInit {
 
   closeDialog(): void {
     this.dialogRef.close('N');
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(null);
+    this.unSubscribe$.complete();
   }
 }

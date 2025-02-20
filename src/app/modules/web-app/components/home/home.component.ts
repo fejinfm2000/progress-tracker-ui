@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild } from '@angular/core';
 import { IAvatharTask, IOverview, IProjectOverView } from '../../models/web-app';
 import {
   MatDialog
@@ -12,6 +12,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { HomeService } from '../../services/home.service';
 import { IUserActivities } from '../../models/home';
 import { ActivatedRoute } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 
 Chart.register(...registerables);
 
@@ -22,7 +23,7 @@ Chart.register(...registerables);
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
   name: string = 'Buddy';
   email!: string;
   newTask: string = '';
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('barCanvas', { static: false }) barCanvas!: ElementRef<HTMLCanvasElement>;
   userActivities!: IUserActivities;
   activityId!: number;
+  unSubscribe$ = new Subject();
   chartHeaderData: { time: number, title: string }[] = [
     { time: 17, title: "Time Spent" },
     { time: 12, title: "Lesson Learn" },
@@ -96,7 +98,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   getUserTaskDetails(email: string) {
-    this.homeService.getAllUserTaskDetails(email).subscribe(data => {
+    this.homeService.getAllUserTaskDetails(email).pipe(takeUntil(this.unSubscribe$)).subscribe(data => {
       this.userActivities = data;
       this.items = this.transformTaskData(this.userActivities);
       this.setNewTask();
@@ -115,8 +117,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         subTitle: activity.activityName,
         description: activity.description,
         repitation: this.userActivities?.subActivity?.length || 0,
-        tasks: this.taskIteration(this.userActivities).slice(0, 3),
-        tasksCount: this.taskIteration(this.userActivities)?.length || 0,
+        tasks: this.taskIteration(this.userActivities, activity.activityId).slice(0, 3),
+        tasksCount: this.taskIteration(this.userActivities, activity.activityId)?.length || 0,
         circumference: parseFloat((2 * Math.PI * 16).toFixed(2)), // Approx. 100.48
         progress: this.userActivities?.subActivity.length
           ? (progress / this.userActivities.subActivity.length) * 100
@@ -127,8 +129,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     })
   }
 
-  taskIteration(userActivities: IUserActivities) {
-    let subActivity = this.generateInitialsForAvatars(userActivities.subActivity.map(subActivity => {
+  taskIteration(userActivities: IUserActivities, activityId: number) {
+    let subActivity = this.generateInitialsForAvatars(userActivities.subActivity?.filter(data => data.activity?.activityId === activityId)?.map(subActivity => {
       return { taskId: subActivity.subActivityId, taskName: subActivity.subActivityName, imageUrl: '' }
     }))
     return subActivity
@@ -192,7 +194,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       data: { email: this.email, userActivities: this.userActivities, currentActivity }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().pipe(takeUntil(this.unSubscribe$)).subscribe(result => {
       if (result == 'Y') {
         this.getUserTaskDetails(this.email);
       }
@@ -296,6 +298,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.barChart = new Chart(ctx, chartConfig);
 
     // this.barChart = new Chart(this.barCanvas.nativeElement, chartConfig);
+  }
+
+  ngOnDestroy(): void {
+    this.unSubscribe$.next(null);
+    this.unSubscribe$.complete();
   }
 
 }
