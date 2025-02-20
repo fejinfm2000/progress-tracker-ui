@@ -11,6 +11,8 @@ export interface IProjectOverView {
     activityId: number,
     title: string,
     description: string,
+    startDate?: string;
+    endDate?: string;
     subTitle: string,
     circumference: number,
     strokeDashoffset: number,

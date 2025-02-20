@@ -31,6 +31,8 @@ export interface IUserActivities {
     userId: number;
     firstName: string;
     lastName: string;
+    startDate: string;
+    endDate: string;
     email: string;
     termsAndConditionFlag: boolean;
     activity: IActivity[];

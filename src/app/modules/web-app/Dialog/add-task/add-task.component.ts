@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HomeService } from '../../services/home.service';
 import { IActivityDetails, IKeyValuePair, ISubActivity, IUserActivities } from '../../models/home';
-import { formatDate } from '@angular/common';
+import { DatePipe, formatDate } from '@angular/common';
 import { IProjectOverView } from '../../models/web-app';
 import { Subject, takeUntil } from 'rxjs';
 
@@ -28,14 +28,19 @@ export class AddTaskComponent implements OnInit, OnDestroy {
 
   constructor(private dialogRef: MatDialogRef<AddTaskComponent>, @Inject(MAT_DIALOG_DATA) public data: { email: string, userActivities: IUserActivities, currentActivity: IProjectOverView }, private fb: FormBuilder, private homeService: HomeService) {
     this.allActivityDetails = data.userActivities;
+    let dateObj: Date | string = ""
+    if (data.currentActivity?.endDate) {
+      let [day, month, year] = data.currentActivity?.endDate!.split('-').map(Number);
+      dateObj = new Date(year, month - 1, day)
+    }
     this.addTaskForm = this.fb.group({
       categoryName: [data.currentActivity?.title, Validators.required],
       email: [data?.email, [Validators.required, Validators.email]],
       activityName: [data.currentActivity?.subTitle, Validators.required],
-      description: [null, Validators.required],
+      description: [data.currentActivity?.description, Validators.required],
       subActivities: this.generateSubActivitiesArray(),
       startDate: [{ value: new Date(), disabled: true }, Validators.required],
-      endDate: [null, Validators.required],
+      endDate: [dateObj, Validators.required],
       status: [{ value: 'Started', disabled: true }, Validators.required],
       progress: [{ value: 0, disabled: true }, Validators.required],
     });
@@ -61,7 +66,6 @@ export class AddTaskComponent implements OnInit, OnDestroy {
       this.addTaskForm.controls['subActivities'] = subActivities as FormArray;
     }
   }
-
 
   generateSubActivitiesGroup() {
     return this.fb.group({

@@ -115,6 +115,8 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
         title: activity.category.categoryName,
         activityId: activity.activityId,
         subTitle: activity.activityName,
+        endDate: activity.endDate,
+        startDate: activity.startDate,
         description: activity.description,
         repitation: this.userActivities?.subActivity?.length || 0,
         tasks: this.taskIteration(this.userActivities, activity.activityId).slice(0, 3),
@@ -141,8 +143,6 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     let inProgressCount = 0;
     let totalCount = this.userActivities.activity.length || 0;
     this.userActivities.activity.forEach(activity => {
-      console.log((this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId)));
-
       completedCount = completedCount + (this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId).every(data => data.status === "Completed") ? 1 : 0);
       inProgressCount = inProgressCount + (this.userActivities.subActivity.filter(data => data.activity?.activityId == activity?.activityId).every(data => data.status === "In-Progress") ? 1 : 0)
     })
